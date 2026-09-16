@@ -1,0 +1,41 @@
+{
+  "generator": "Built-in image_gen",
+  "images": [
+    {
+      "name": "community",
+      "output": "public/images/community.webp",
+      "prompt": "Wide landscape editorial photograph for a community welfare NGO website in India. A joyful candid gathering in a sunlit ashram courtyard under an old tree: elderly Indian women and men, adult volunteers and families talking together, with a smiling elderly woman in a saffron sari in the foreground. Natural human connection, lush greenery and simple warm plaster architecture, afternoon golden light. Wide cinematic framing, faces occupy middle of frame, photographic realism, subtle film texture, muted warm cream and green palette, dignified and optimistic. No text, logos, watermark. 3:2 landscape.",
+      "sourceFilename": "exec-31d35b71-3230-4e32-bff4-dd42b6561e72.png"
+    },
+    {
+      "name": "education",
+      "output": "public/images/education.webp",
+      "prompt": "Landscape editorial photograph in India: a woman volunteer helping a small group of school-aged children read illustrated books at a wooden table in an airy community learning room, plants and warm walls in the background. Candid, respectful, hopeful, realistic faces and hands. Warm natural daylight, earthy green and saffron accents, subtle film texture. No text overlays, logos, watermarks. 3:2 landscape.",
+      "sourceFilename": "exec-0870fcf2-9ec5-4104-a12c-0df67266533d.png"
+    },
+    {
+      "name": "food",
+      "output": "public/images/food.webp",
+      "prompt": "Landscape editorial photograph in India: smiling adult volunteers serving a fresh vegetarian meal from stainless steel pots in a bright simple community kitchen, one volunteer handing a plate to an older community member. Dignified candid interaction, clean warm setting, natural light, warm cream and green palette, subtle film texture, realistic photography. No text, logos, watermarks. 3:2 landscape.",
+      "sourceFilename": "exec-adf02288-5899-42b2-9495-82e3396b9f17.png"
+    },
+    {
+      "name": "elders",
+      "output": "public/images/elders.webp",
+      "prompt": "Landscape editorial photograph in an Indian ashram garden: an elderly Indian woman in a softly colored sari laughing with a young adult woman volunteer as they sit together on a bench, affectionate friendly conversation, greenery and warm plaster wall softly blurred behind them. Warm natural golden light, realistic skin and hands, dignified, candid, soft film texture. No text, logos, watermarks. 3:2 landscape.",
+      "sourceFilename": "exec-64d78f1f-d2ff-41fb-bc1b-35cf82a5a42d.png"
+    },
+    {
+      "name": "health",
+      "output": "public/images/health.webp",
+      "prompt": "Landscape editorial photograph in an Indian community health outreach room: a female adult health volunteer in simple white clothing gently checking an elderly man's blood pressure while he sits comfortably, welcoming plant-filled community center, natural warm daylight, dignified friendly atmosphere, realistic hands and equipment, warm cream muted green colors and subtle film grain. No text, logos, watermarks. 3:2 landscape.",
+      "sourceFilename": "exec-88a0e4de-5298-4fbf-9782-1a657db15a2e.png"
+    },
+    {
+      "name": "volunteers",
+      "output": "public/images/volunteers.webp",
+      "prompt": "Landscape editorial photograph in India: four diverse adult community volunteers tending a small vegetable garden at an ashram, talking and smiling while planting saplings, simple cotton clothing, lush green courtyard with terracotta pots, warm afternoon natural light, candid and dignified, realistic faces and hands, warm cream green and saffron colors, subtle film texture. No text, logos, watermarks. 3:2 landscape.",
+      "sourceFilename": "exec-ffcbe0c2-9a5f-4df9-aeef-6de2969b3d54.png"
+    }
+  ]
+}

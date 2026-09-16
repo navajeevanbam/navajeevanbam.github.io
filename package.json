@@ -1,0 +1,27 @@
+{
+  "name": "navjeen-seva-ashram",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0",
+    "check": "astro check",
+    "test": "node scripts/verify-build.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/lora": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}

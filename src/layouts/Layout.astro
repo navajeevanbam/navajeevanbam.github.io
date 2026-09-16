@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { site, url, photos } from '../lib/site';
+import Icon from '../components/Icon.astro';
+interface Props { title: string; description: string; active?: string; image?: string; }
+const { title, description, active = '', image = 'community' } = Astro.props;
+const links = [['Home', ''], ['About us', 'about/'], ['Our events', 'events/'], ['Stories & blogs', 'blogs/'], ['Contact', 'contact/']];
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).href : undefined;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#203e32"/>
+    <meta name="description" content={description}/>
+    <title>{title} | {site.name}</title>
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')}/>
+    {canonical && <link rel="canonical" href={canonical}/>}
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content={`${title} | ${site.name}`}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:site_name" content={site.name}/>
+    {canonical && <meta property="og:url" content={canonical}/>}
+    {socialImage && <meta property="og:image" content={socialImage}/>}
+    <meta name="twitter:card" content="summary_large_image"/>
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 focus:rounded-lg focus:bg-white focus:p-4">Skip to content</a>
+    <div class="border-b border-forest/10 bg-[#eeeedd] px-4 py-2 text-center text-[10px] tracking-[.04em] text-forest/80">A little care can change a life. <span class="hidden sm:inline">Together, let’s make room for a new beginning.</span> <span class="mx-2 opacity-30">|</span> <a href={url('contact/')} class="underline underline-offset-3">Join our community <span aria-hidden="true">↗</span></a></div>
+    <header class="sticky top-0 z-50 border-b border-forest/10 bg-cream/95 backdrop-blur-md">
+      <div class="container relative flex min-h-[88px] items-center justify-between gap-5">
+        <a href={url()} class="flex items-center gap-2.5 shrink-0" aria-label={`${site.name} home`}>
+          <svg class="brand-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 28C8 28 8 13 8 13s15-1 16 15Zm0 0c16 0 16-15 16-15S25 12 24 28Z" fill="#203e32"/><path d="M24 23C13 14 24 3 24 3s11 11 0 20Z" fill="#b47a30"/><path d="M7 31c5 1 9 7 17 7s12-6 17-7M13 40c4 3 8 4 11 4s7-1 11-4" stroke="#203e32" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <span><span class="block font-serif text-[20px] leading-tight tracking-[-.035em]">Navjeen</span><span class="block text-[9px] uppercase tracking-[.22em] mt-1">Seva Ashram</span></span>
+        </a>
+        <nav id="main-navigation" class="desktop-nav items-center gap-7 lg:flex" aria-label="Main navigation">
+          {links.map(([label, path]) => <a href={url(path)} aria-current={active === path ? 'page' : undefined} class="relative text-xs font-medium text-muted">{label}</a>)}
+        </nav>
+        <div class="flex items-center gap-3"><a class="button button-dark min-h-10 px-4 sm:px-5 text-xs" href={url('donation/')} aria-current={active === 'donation/' ? 'page' : undefined}><span class="hidden sm:inline">Make a</span> donation <Icon name="heart" class="size-4"/></a><button id="menu-toggle" class="flex size-11 items-center justify-center rounded-full border border-forest/20 lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot/></main>
+    <footer class="bg-forest text-white">
+      <div class="container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+        <div><a href={url()} class="font-serif text-2xl text-white hover:text-saffron">Navjeen Seva Ashram<span class="block mt-2 font-sans text-[9px] uppercase tracking-[.25em] text-saffron">Rooted in care. Growing together.</span></a><p class="mt-5 max-w-xs text-sm text-white/70">A shared home for kindness, dignity, and the belief that every life deserves a new beginning.</p><div class="mt-5 flex items-center gap-2 text-xs text-saffron"><Icon name="heart" class="size-4"/> Made with care, for our community.</div></div>
+        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Explore the Ashram</h2><a class="footer-link" href={url('about/')}>Our story</a><a class="footer-link" href={url('events/')}>Events & gatherings</a><a class="footer-link" href={url('blogs/')}>Stories from the Ashram</a><a class="footer-link" href={url('contact/')}>Get in touch</a></div>
+        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Be part of the change</h2><a class="footer-link" href={url('donation/')}>Make a donation</a><a class="footer-link" href={url('contact/')}>Volunteer with us</a><a class="footer-link" href={url('about/#programs')}>Our initiatives</a></div>
+        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Our door is always open</h2><p class="mt-4 text-sm text-white/70">{site.address}</p><p class="mt-3 text-sm text-white/70">{site.email}<br/><span class="text-[10px] text-white/55">Placeholder contact details</span></p><a class="text-link mt-5 text-saffron hover:text-white" href={url('contact/')}>Let’s start a conversation <Icon name="arrow"/></a></div>
+      </div>
+      <div class="border-t border-white/15"><div class="container flex flex-col justify-between gap-3 py-5 text-[10px] leading-relaxed text-white/65 md:flex-row"><p>© {new Date().getFullYear()} {site.name}. A little care. A new beginning.</p><p class="max-w-lg md:text-right">Illustrative website: sample stories, events, and impact figures. All photographs are AI-generated. No payments or messages are sent.</p></div></div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('#menu-toggle');
+      const navigation = document.querySelector<HTMLElement>('#main-navigation');
+      function setMenu(open: boolean) {
+        toggle?.setAttribute('aria-expanded', String(open));
+        toggle?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+        navigation?.classList.toggle('is-open', open);
+      }
+      toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') { setMenu(false); toggle.focus(); }
+      });
+      document.addEventListener('click', (event) => {
+        if (event.target instanceof Node && !navigation?.contains(event.target) && !toggle?.contains(event.target)) setMenu(false);
+      });
+      matchMedia('(min-width: 1024px)').addEventListener('change', () => setMenu(false));
+    </script>
+    <noscript><style>@media(max-width:1023px){.desktop-nav{display:flex;position:static;flex-wrap:wrap;width:100%;gap:20px;padding-bottom:20px}header>.container{flex-wrap:wrap;padding-top:15px}.desktop-nav{order:3}#menu-toggle{display:none}}</style></noscript>
+  </body>
+</html>

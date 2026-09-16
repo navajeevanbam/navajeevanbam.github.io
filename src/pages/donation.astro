@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
+import { programs, url } from '../lib/site';
+---
+<Layout title="Make a contribution" description="Explore how your kindness could support education, nourishing meals, elder companionship, and community wellbeing at Navjeen Seva Ashram." active="donation/">
+  <PageIntro eyebrow="A little generosity goes a long way" title="Be someone’s new beginning." description="A warm meal. A new book. An afternoon of companionship. Your willingness to care is where change begins."/>
+  <section class="container section-space"><div class="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16"><div><Photo name="food" eager class="aspect-[1.5] w-full rounded-3xl"/><h2 class="mt-8">Give with heart.<br/>Help hope grow.</h2><p class="mt-5 text-muted">We are building a community where care feels personal. Your support could help us create thoughtful opportunities for learning, nourishment, connection, and wellbeing.</p><div class="mt-7 flex items-start gap-3 rounded-xl bg-[#efeee4] p-5"><Icon name="heart" class="mt-1 shrink-0 text-[#9b7437]"/><p class="text-sm text-muted">This is a preview of our giving experience. Real donation methods and verified information about how funds are used will be added before contributions are accepted.</p></div></div>
+    <div class="content-card h-fit p-6 sm:p-9"><p class="eyebrow">Choose your kindness</p><h2 class="text-3xl">Every contribution matters.</h2><p class="mt-3 text-sm text-muted">Try the donation experience below.</p><form id="donation-form" class="mt-7" data-demo-form>
+      <fieldset><legend class="form-label mb-3">Choose an amount <span class="font-normal text-muted">(INR)</span></legend><div class="grid grid-cols-3 gap-3">{[500,1000,2500].map((amount,i) => <label class="amount-option cursor-pointer rounded-xl border border-forest/25 px-2 py-4 text-center text-sm font-semibold"><input type="radio" name="amount-choice" value={amount} checked={i === 1} class="sr-only"/>₹{amount.toLocaleString('en-IN')}</label>)}</div><label class="amount-option mt-3 flex cursor-pointer items-center gap-3 rounded-xl border border-forest/25 p-4 text-sm"><input type="radio" name="amount-choice" value="custom" class="accent-forest"/>Choose a custom amount</label></fieldset>
+      <div id="custom-amount-wrap" class="mt-5" hidden><label for="custom-amount" class="form-label">Your amount in rupees</label><input id="custom-amount" class="form-input" type="number" min="1" max="10000000" step="1" inputmode="numeric" placeholder="Enter a whole-rupee amount" disabled aria-describedby="amount-help"/><p id="amount-help" class="mt-2 text-xs text-muted">Enter ₹1 to ₹1,00,00,000 in whole rupees.</p></div>
+      <label for="donation-cause" class="form-label mt-6">Where would you like to help?</label><select id="donation-cause" name="cause" class="form-input"><option>Where it is needed most</option>{programs.map(program => <option>{program.category}</option>)}</select>
+      <div class="mt-7 flex items-center justify-between border-y border-forest/15 py-5"><span class="text-sm text-muted">Your selected contribution</span><output id="amount-preview" class="font-serif text-2xl" aria-live="polite">₹1,000</output></div>
+      <p class="demo-note mt-6">Demo only. No payment will be processed, and no payment details are collected.</p><button type="submit" class="button button-dark mt-5 w-full" disabled>Preview my contribution <Icon name="heart"/></button><p id="donation-result" class="form-result" role="status" hidden></p>
+      <noscript><p class="demo-note mt-4">Enable JavaScript to try this local donation demo.</p></noscript>
+    </form></div></div></section>
+  <section class="bg-[#efeee4] section-space"><div class="container"><p class="eyebrow">The care your kindness could make possible</p><h2>One gift. Many possibilities.</h2><div class="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{programs.map(program => <article class="rounded-2xl bg-cream p-6"><Icon name={program.icon} class="mb-5 size-7 text-[#936c29]"/><h3 class="text-xl">{program.category}</h3><p class="mt-3 text-sm text-muted">{program.description}</p></article>)}</div><p class="mt-6 text-xs text-muted">Program descriptions are illustrative. Specific allocation and outcome information will be published when confirmed.</p></div></section>
+  <section class="container section-space"><div class="mx-auto max-w-3xl"><p class="eyebrow">A few helpful answers</p><h2 class="mb-8">Giving, with clarity.</h2>{[{q:'Can I make a real donation here?',a:'Not yet. This page is an interactive demonstration. It does not connect to a payment provider, collect card or bank information, or transfer money.'},{q:'Will I receive a receipt or tax benefit?',a:'No receipt is issued by this demonstration. Registration, donation eligibility, and any applicable tax information must be verified and published before real donations are enabled.'},{q:'Can I contribute my time instead?',a:'Absolutely—volunteering is part of our vision. Use the Contact page to explore the example enquiry form. Confirmed opportunities and real contact details will be added later.'}].map(item => <details class="border-b border-forest/15 py-5"><summary class="cursor-pointer pr-5 text-sm font-semibold">{item.q}</summary><p class="mt-4 text-sm text-muted">{item.a}</p></details>)}<a class="text-link mt-7" href={url('contact/')}>Have another question? Get in touch <Icon name="arrow"/></a></div></section>
+</Layout>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#donation-form')!;
+  const custom = document.querySelector<HTMLInputElement>('#custom-amount')!;
+  const customWrap = document.querySelector<HTMLElement>('#custom-amount-wrap')!;
+  const preview = document.querySelector<HTMLOutputElement>('#amount-preview')!;
+  const result = document.querySelector<HTMLElement>('#donation-result')!;
+  const currency = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
+  const selectedAmount = () => { const choice = form.querySelector<HTMLInputElement>('input[name="amount-choice"]:checked')!.value; return choice === 'custom' ? custom.valueAsNumber : Number(choice); };
+  function updateAmount() {
+    const isCustom = form.querySelector<HTMLInputElement>('input[name="amount-choice"]:checked')!.value === 'custom';
+    customWrap.hidden = !isCustom; custom.disabled = !isCustom; custom.required = isCustom;
+    const value = selectedAmount(); preview.textContent = Number.isFinite(value) && value >= 1 && value <= 10000000 && Number.isInteger(value) ? currency.format(value) : 'Enter amount';
+    result.hidden = true;
+  }
+  form.querySelector<HTMLButtonElement>('button[type="submit"]')!.disabled = false;
+  form.addEventListener('change', updateAmount);
+  custom.addEventListener('input', updateAmount);
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const cause = form.querySelector<HTMLSelectElement>('#donation-cause')!.value;
+    result.textContent = `Your example contribution: ${currency.format(selectedAmount())} · ${cause}. Thank you for your kindness. Demo only—no payment processed.`;
+    result.hidden = false;
+  });
+</script>

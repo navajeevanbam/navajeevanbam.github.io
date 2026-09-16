@@ -1,0 +1,51 @@
+# Dependencies and package-manager caches
+node_modules/
+.npm/
+.pnpm-store/
+
+# Astro output and build caches
+dist/
+.astro/
+.cache/
+.vite/
+*.tsbuildinfo
+
+# Test reports and coverage
+test-results/
+playwright-report/
+playwright/.cache/
+coverage/
+.nyc_output/
+
+# Local environment files (keep shareable examples)
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.template
+
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Operating-system metadata
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# Local recovery archives
+/*-restored-backup.zip

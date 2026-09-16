@@ -1,0 +1,8 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { url } from '../lib/site';
+---
+<Layout title="Let’s find your way home" description="This page could not be found. Return to Navjeen Seva Ashram’s homepage or explore our community events." active="404">
+  <section class="container py-24 text-center"><span class="mx-auto mb-7 flex size-20 items-center justify-center rounded-full bg-[#eee9d6]"><Icon name="sun" class="size-9"/></span><p class="mb-5 text-xs font-semibold uppercase tracking-[.2em]">404 · A little off the path</p><h1>Let’s find your way home.</h1><p class="mx-auto mt-6 max-w-lg text-muted">The page you are looking for may have moved, or the link may be incomplete. There is still plenty of kindness to discover.</p><div class="mt-8 flex flex-wrap justify-center gap-3"><a href={url()} class="button button-dark">Back to the Ashram <Icon name="arrow"/></a><a href={url('events/')} class="button button-outline">Explore our gatherings</a></div></section>
+</Layout>
