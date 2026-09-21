@@ -30,9 +30,9 @@ The production output is `dist/`. It consists only of HTML, CSS, JavaScript, fon
 - `src/config/photos.ts`: image paths and accessible descriptions.
 - `src/lib/site.ts`: URL and date formatting helpers only.
 
-Config files are typed TypeScript. Add phone/email entries to their arrays and all contact lists update automatically. Address lines are rendered as separate lines in the footer and joined on the contact page. Store logo/image files in `public/` and use paths relative to that folder. Logo lettering is part of the image, so changing the organization name also requires an updated logo image. Blog/event prose remains editable Markdown under `src/content/`; other page-specific copy remains in `src/pages/`. Run `npm run check` and rebuild for deployment after editing config.
+Config files are typed TypeScript. Add phone/email entries to their arrays and all contact lists update automatically. Address lines are rendered as separate lines in the footer and joined on the contact page. Store logo/image files in `public/` and use paths relative to that folder. Logo lettering is part of the image, so changing the organization name also requires an updated logo image. Story/event prose remains editable Markdown under `src/content/`; other page-specific copy remains in `src/pages/`. Run `npm run check` and rebuild for deployment after editing config.
 - `src/content/events/`: Markdown events; filenames become public event IDs. Each event includes title, excerpt, date, image key, category, status (`upcoming` or `past`), location, time, and schedule. Update status manually when an event passes, then rebuild.
-- `src/content/blogs/`: Markdown articles; filenames become public blog IDs. Include title, excerpt, date, image key, category, author, and estimated reading time in minutes.
+- `src/content/stories/`: Markdown articles; filenames become public story IDs. Include title, excerpt, date, image key, category, author, and estimated reading time in minutes.
 - `src/content.config.ts`: schemas validated during builds.
 - `src/pages/index.astro`: landing-page copy and illustrative impact figures.
 - `src/styles/global.css`: palette, local fonts, shared components, and responsive behavior.

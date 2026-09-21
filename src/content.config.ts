@@ -15,8 +15,8 @@ export const collections = {
     loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
     schema: z.object({ ...shared, status: z.enum(['upcoming', 'past']), location: z.string(), time: z.string(), schedule: z.array(z.object({ time: z.string(), activity: z.string() })) }),
   }),
-  blogs: defineCollection({
-    loader: glob({ pattern: '**/*.md', base: './src/content/blogs' }),
+  stories: defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/stories' }),
     schema: z.object({ ...shared, author: z.string(), readTime: z.number() }),
   }),
 };

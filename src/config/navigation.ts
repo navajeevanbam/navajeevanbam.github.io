@@ -3,6 +3,6 @@ export const navigation: [label: string, path: string][] = [
   ['Home', ''],
   ['About us', 'about/'],
   ['Our events', 'events/'],
-  ['Stories & blogs', 'blogs/'],
+  ['Stories', 'stories/'],
   ['Contact', 'contact/'],
 ];

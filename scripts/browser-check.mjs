@@ -37,8 +37,8 @@ try {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   const events = (await readdir('src/content/events')).map(name => `events/${name.replace('.md', '')}/`);
-  const blogs = (await readdir('src/content/blogs')).map(name => `blogs/${name.replace('.md', '')}/`);
-  const routes = ['', 'about/', 'donation/', 'contact/', 'events/', 'blogs/', ...events, ...blogs, '404.html'];
+  const stories = (await readdir('src/content/stories')).map(name => `stories/${name.replace('.md', '')}/`);
+  const routes = ['', 'about/', 'donation/', 'contact/', 'events/', 'stories/', ...events, ...stories, '404.html'];
   for (const width of [375, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     for (const route of routes) {
@@ -50,7 +50,7 @@ try {
       await page.waitForFunction(() => [...document.images].every(img => img.complete && img.naturalWidth > 0));
       await page.evaluate(async () => { await Promise.all([...document.images].map(img => img.decode())); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Horizontal overflow: ${route} at ${width}px`);
-      if (route === '' || (width === 375 || width === 1440) && ['donation/','contact/',events[0],blogs[0]].includes(route)) {
+      if (route === '' || (width === 375 || width === 1440) && ['donation/','contact/',events[0],stories[0]].includes(route)) {
         await page.screenshot({ path: `${output}/${route.replaceAll('/', '-') || 'home'}-${width}.png`, fullPage: true });
       }
       result.layouts.push({ route, width, passed: true });
@@ -61,7 +61,7 @@ try {
       }
     }
   }
-  for (const route of [...events, ...blogs]) {
+  for (const route of [...events, ...stories]) {
     await page.goto(href(route));
     assert.equal((await page.reload()).status(), 200, `Direct refresh failed: ${route}`);
   }

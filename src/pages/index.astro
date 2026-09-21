@@ -5,12 +5,12 @@ import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
 import EventCard from '../components/EventCard.astro';
-import BlogCard from '../components/BlogCard.astro';
+import StoryCard from '../components/StoryCard.astro';
 import JoinBanner from '../components/JoinBanner.astro';
 import { programs } from '../config';
 import { url } from '../lib/site';
 const events = (await getCollection('events')).filter(e => e.data.status === 'upcoming').sort((a,b) => +a.data.date - +b.data.date).slice(0,3);
-const blogs = (await getCollection('blogs')).sort((a,b) => +b.data.date - +a.data.date).slice(0,3);
+const stories = (await getCollection('stories')).sort((a,b) => +b.data.date - +a.data.date).slice(0,3);
 ---
 <Layout title="A little care. A new beginning." description={`Welcome to ${site.name}. Discover a community rooted in compassion, education, nourishment, elder care, and wellbeing.`} active="">
   <section class="container pt-10 pb-14 md:pt-16 md:pb-20">
@@ -24,6 +24,6 @@ const blogs = (await getCollection('blogs')).sort((a,b) => +b.data.date - +a.dat
   <section class="bg-[#efeee4] section-space"><div class="container"><div class="section-heading"><div><p class="eyebrow">How we care</p><h2>Many needs. One shared purpose.</h2></div><p class="max-w-sm text-sm text-muted">Small, thoughtful actions that help our neighbours live fuller, healthier, happier lives.</p></div><div class="program-grid grid md:grid-cols-4">{programs.map((program, index) => <article class="py-6 md:py-0 md:px-5 first:pl-0 last:pr-0"><div class="mb-6 flex items-center justify-between"><span class="flex size-12 items-center justify-center rounded-full bg-[#e0e3d4]"><Icon name={program.icon}/></span><span class="font-serif text-sm text-muted">0{index+1}</span></div><p class="mb-2 text-[9px] uppercase tracking-[.15em] text-muted">{program.category}</p><h3 class="text-xl">{program.title}</h3><p class="mt-4 text-xs text-muted">{program.description}</p><a href={url(`about/#${program.image}`)} class="text-link mt-6">Learn more <Icon name="arrow"/></a></article>)}</div></div></section>
   <section class="container section-space"><div class="section-heading"><div><p class="eyebrow">Come together. Give together.</p><h2>Good things happen when we gather.</h2></div><a href={url('events/')} class="text-link">View all events <Icon name="arrow"/></a></div><div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{events.map(event => <EventCard event={event}/>)}</div></section>
   <section class="container pb-4 md:pb-8"><div class="relative isolate overflow-hidden rounded-3xl bg-forest"><Photo name="volunteers" class="absolute inset-0 -z-20 size-full opacity-35"/><div class="absolute inset-0 -z-10 bg-gradient-to-r from-forest/95 via-forest/70 to-transparent"></div><div class="max-w-2xl px-7 py-14 text-white md:px-14 md:py-18"><p class="eyebrow text-saffron">Your time is a beautiful gift</p><h2>You don’t need to change<br/>the world in a day.</h2><p class="mt-5 max-w-md text-sm text-white/85">Just bring your kindness. Read a story, share a skill, plant a seed, or spend an afternoon listening. There’s a place for you here.</p><a class="button button-saffron mt-7" href={url('contact/')}>Find your way to give back <Icon name="arrow"/></a></div></div></section>
-  <section class="container section-space"><div class="section-heading"><div><p class="eyebrow">Notes from our community</p><h2>Little stories. A lot of heart.</h2></div><a href={url('blogs/')} class="text-link">Explore all stories <Icon name="arrow"/></a></div><div class="grid gap-9 md:grid-cols-2 lg:grid-cols-3">{blogs.map(blog => <BlogCard blog={blog}/>)}</div></section>
+  <section class="container section-space"><div class="section-heading"><div><p class="eyebrow">Notes from our community</p><h2>Little stories. A lot of heart.</h2></div><a href={url('stories/')} class="text-link">Explore all stories <Icon name="arrow"/></a></div><div class="grid gap-9 md:grid-cols-2 lg:grid-cols-3">{stories.map(story => <StoryCard story={story}/>)}</div></section>
   <JoinBanner/>
 </Layout>

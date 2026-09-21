@@ -1,9 +1,0 @@
----
-import type { CollectionEntry } from 'astro:content';
-import { url, dateLabel } from '../lib/site';
-import Photo from './Photo.astro';
-import Icon from './Icon.astro';
-interface Props { blog: CollectionEntry<'blogs'>; }
-const { blog } = Astro.props;
----
-<article class="blog-card"><a href={url(`blogs/${blog.id}/`)} class="card-photo" tabindex="-1" aria-hidden="true"><Photo name={blog.data.image}/></a><div class="pt-6"><p class="card-category">{blog.data.category} <span class="mx-2 text-stone-400">·</span> {blog.data.readTime} min read</p><h3><a href={url(`blogs/${blog.id}/`)}>{blog.data.title}</a></h3><p class="card-description">{blog.data.excerpt}</p><div class="flex items-center justify-between gap-3 mt-5"><span class="text-xs text-muted">{dateLabel(blog.data.date)}</span><a class="text-link" href={url(`blogs/${blog.id}/`)}>Read story <Icon name="arrow"/></a></div></div></article>
