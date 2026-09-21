@@ -118,3 +118,7 @@ node scripts/browser-check.mjs
 ```
 
 For a subpath build, run `BASE_PATH=/repository node scripts/browser-check.mjs`. Screenshots and test results go into the ignored `test-results/` directory.
+
+### Favicons and social link
+
+The favicon source is `public/images/branding/favicon.svg`. Run `node scripts/generate-favicons.mjs` after editing it to regenerate browser PNGs, the Apple touch icon, and the root `public/favicon.ico` fallback. The footer Facebook link uses `site.community.href` from `src/config/site.ts`.
