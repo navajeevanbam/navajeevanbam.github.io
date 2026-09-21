@@ -2,6 +2,10 @@
 
 A fully static community-welfare website built with Astro, TypeScript, and Tailwind CSS. Includes an editorial homepage, Donation, Contact, four events, eleven stories/services, three sample photo albums, a legacy About redirect, and a custom 404 page.
 
+## Guide for teachers and staff
+
+See [Adding events, stories, and photo galleries](docs/CONTENT-GUIDE.md) for step-by-step instructions, copy-and-paste examples, and help with common errors. No coding experience is required.
+
 ## Local development
 
 Use Node.js 24 and npm.
