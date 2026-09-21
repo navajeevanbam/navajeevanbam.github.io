@@ -1,0 +1,9 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url, dateLabel } from '../lib/site';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+interface Props { story: CollectionEntry<'stories'>; }
+const { story } = Astro.props;
+---
+<article class="story-card"><a href={url(`stories/${story.id}/`)} class="card-photo" tabindex="-1" aria-hidden="true"><Photo name={story.data.image}/></a><div class="pt-6"><p class="card-category">{story.data.category} <span class="mx-2 text-stone-400">·</span> {story.data.readTime} min read</p><h3><a href={url(`stories/${story.id}/`)}>{story.data.title}</a></h3><p class="card-description">{story.data.excerpt}</p><div class="flex items-center justify-between gap-3 mt-5"><span class="text-xs text-muted">{dateLabel(story.data.date)}</span><a class="text-link" href={url(`stories/${story.id}/`)}>Read story <Icon name="arrow"/></a></div></div></article>
