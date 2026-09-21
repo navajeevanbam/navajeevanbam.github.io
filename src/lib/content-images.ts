@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import type { PhotoData } from './image-types';
 
 interface ImageEntry {
-  collection: 'events' | 'stories';
+  collection: 'events' | 'stories' | 'gallery';
   id: string;
   data: { image: string; imageAlt: string; imageSource?: string };
 }

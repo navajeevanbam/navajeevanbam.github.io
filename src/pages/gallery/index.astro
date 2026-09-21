@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import GalleryCard from '../../components/GalleryCard.astro';
+import JoinBanner from '../../components/JoinBanner.astro';
+import { sortAlbums } from '../../lib/gallery';
+const albums = (await getCollection('gallery')).sort(sortAlbums);
+---
+<Layout title="Photo gallery" description="Explore moments of shared meals, learning, and community care through our photo albums." active="gallery/">
+  <PageIntro eyebrow="Moments we share" title="A little glimpse. A lasting memory." description="Step into the moments of kindness, learning, and togetherness that bring a community to life."/>
+  <section class="container section-space" aria-label="Photo albums"><div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">{albums.map((album, index) => <GalleryCard album={album} index={index}/>)}</div></section>
+  <JoinBanner/>
+</Layout>

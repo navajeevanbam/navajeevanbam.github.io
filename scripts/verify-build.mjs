@@ -11,7 +11,7 @@ async function walk(dir) {
 const files = await walk(root);
 const pages = files.filter(file => extname(file) === '.html');
 const contentCount = (await walk(resolve('src/content'))).filter(file => extname(file) === '.md').length;
-assert.equal(pages.length, 7 + contentCount, 'Expected five primary pages, the About redirect, all content detail pages, and a 404 page');
+assert.equal(pages.length, 8 + contentCount, 'Expected six primary pages, the About redirect, all content detail pages, and a 404 page');
 assert.ok(!files.some(file => /\/blogs\//i.test(file)), 'Obsolete routes must not be generated');
 const titles = new Set();
 let checked = 0;

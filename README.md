@@ -1,6 +1,6 @@
 # Navajeevan Seva Ashram
 
-A fully static community-welfare website built with Astro, TypeScript, and Tailwind CSS. Includes an editorial homepage, Donation, Contact, nine events, eleven stories/services, a legacy About redirect, and a custom 404 page.
+A fully static community-welfare website built with Astro, TypeScript, and Tailwind CSS. Includes an editorial homepage, Donation, Contact, four events, eleven stories/services, three sample photo albums, a legacy About redirect, and a custom 404 page.
 
 ## Local development
 
@@ -52,6 +52,7 @@ public/images/
 ├── donation/                 # Includes the original, unmodified QR file
 ├── events/<event-id>/cover.webp
 ├── stories/<story-id>/cover.webp
+├── gallery/<album-id>/
 └── shared/illustrations/
 ```
 
@@ -122,3 +123,27 @@ For a subpath build, run `BASE_PATH=/repository node scripts/browser-check.mjs`.
 ### Favicons and social link
 
 The favicon source is `public/images/branding/favicon.svg`. Run `node scripts/generate-favicons.mjs` after editing it to regenerate browser PNGs, the Apple touch icon, and the root `public/favicon.ico` fallback. The footer Facebook link uses `site.community.href` from `src/config/site.ts`.
+
+### Gallery albums
+
+Navigation links to `/gallery/`; the homepage shows the three newest albums. Albums sort by date descending, then title. To add one, create `src/content/gallery/your-album.md` and put its photographs in `public/images/gallery/your-album/`:
+
+```yaml
+---
+title: "A community gathering"
+date: "2026-09-06"
+description: "A short description of the gathering."
+sample: false
+cover: "shared-meal.webp"
+images:
+  - filename: "shared-meal.webp"
+    alt: "Community members sharing lunch in a courtyard"
+    caption: "Lunch together in the courtyard."
+  - filename: "volunteers.webp"
+    alt: "Volunteers preparing the tables"
+---
+```
+
+List photos in their display order. `cover` must match a listed filename; filenames must be unique within the album. Use lowercase hyphenated filenames and WebP, JPEG, or PNG images. Captions are optional and fall back to alt text. Dimensions are read automatically; no image registry edits are required. Run `npm run check`, `npm run build`, and `npm test` before publishing. Album IDs come from Markdown filenames.
+
+The initial three albums are explicitly labeled samples with illustrative dates and twelve AI-generated images. Generation prompts are recorded in `scripts/gallery-image-prompts.json`. The viewer supports previous/next, arrow keys, Escape, focus restoration, and direct full-image links without JavaScript. There is no autoplay.

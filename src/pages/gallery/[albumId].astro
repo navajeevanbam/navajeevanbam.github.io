@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Photo from '../../components/Photo.astro';
+import GalleryViewer from '../../components/GalleryViewer.astro';
+import { albumPhotos } from '../../lib/gallery';
+import { url, dateLabel } from '../../lib/site';
+export async function getStaticPaths() { return (await getCollection('gallery')).map(album => ({ params: { albumId: album.id }, props: { album } })); }
+const { album } = Astro.props;
+const photos = await albumPhotos(album);
+const cover = photos.find(photo => photo.filename === album.data.cover)!;
+---
+<Layout title={album.data.title} description={album.data.description} active="gallery/" image={cover}>
+  <section class="container section-space pb-8" data-reveal><nav class="breadcrumbs" aria-label="Breadcrumb"><a href={url()}>Home</a><span aria-hidden="true">/</span><a href={url('gallery/')}>Gallery</a><span aria-hidden="true">/</span><span aria-current="page">{album.data.title}</span></nav><p class="eyebrow">{album.data.sample ? 'Sample album' : 'Photo album'}</p><h1 class="max-w-4xl">{album.data.title}</h1><p class="intro-copy">{album.data.description}</p><p class="mt-6 text-sm text-muted">{album.data.sample && 'Illustrative date · '}<time datetime={album.data.date.toISOString().slice(0,10)}>{dateLabel(album.data.date)}</time> · {photos.length} photos</p>{album.data.sample && <p class="demo-note mt-6">These AI-generated images depict fictional scenes. This sample album and its date do not document an actual Ashram event.</p>}</section>
+  <section class="container section-space pt-8" aria-label="Album photos"><div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">{photos.map((photo, index) => <figure data-reveal data-reveal-delay={(index % 3) * 100}><a href={url(photo.src)} data-gallery-photo data-caption={photo.caption} class="gallery-photo" aria-label={`Enlarge photo ${index + 1}: ${photo.alt}`}><Photo photo={photo} eager={index === 0} class="w-full aspect-[1.5] object-cover rounded-2xl"/></a><figcaption class="mt-3 text-sm text-muted">{photo.caption}</figcaption></figure>)}</div><a href={url('gallery/')} class="text-link mt-12">← Back to all albums</a></section>
+  <GalleryViewer title={album.data.title}/>
+</Layout>
+<style>.gallery-photo { display:block; border-radius:1rem; overflow:hidden; } .gallery-photo img { transition:transform .3s; } .gallery-photo:hover img { transform:scale(1.025); }</style>

@@ -38,7 +38,8 @@ try {
   page.on('pageerror', error => errors.push(error.message));
   const events = (await readdir('src/content/events')).map(name => `events/${name.replace('.md', '')}/`);
   const stories = (await readdir('src/content/stories')).map(name => `stories/${name.replace('.md', '')}/`);
-  const routes = ['', 'donation/', 'contact/', 'events/', 'stories/', ...events, ...stories, '404.html'];
+  const galleries = (await readdir('src/content/gallery')).map(name => `gallery/${name.replace('.md', '')}/`);
+  const routes = ['', 'donation/', 'contact/', 'events/', 'stories/', 'gallery/', ...events, ...stories, ...galleries, '404.html'];
   for (const width of [375, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     for (const route of routes) {
@@ -51,7 +52,7 @@ try {
       await page.waitForFunction(() => [...document.images].every(img => img.complete && img.naturalWidth > 0));
       await page.evaluate(async () => { await Promise.all([...document.images].map(img => img.decode())); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Horizontal overflow: ${route} at ${width}px`);
-      if (route === '' || (width === 375 || width === 1440) && ['donation/','contact/','404.html',events[0],stories[0]].includes(route)) {
+      if (route === '' || (width === 375 || width === 1440) && ['donation/','contact/','404.html','gallery/',galleries[0],events[0],stories[0]].includes(route)) {
         if (await page.locator('[data-reveal]').count()) {
           for (const item of await page.locator('[data-reveal]').all()) {
             await item.evaluate(el => el.scrollIntoView({behavior:'instant',block:'center'}));
@@ -73,7 +74,55 @@ try {
       }
     }
   }
-  for (const route of [...events, ...stories]) {
+  await page.goto(href('gallery/'));
+  assert.deepEqual(await page.locator('.gallery-card h3').allTextContents(), ['A Day of Shared Meals','Learning Together','Planting a Greener Tomorrow']);
+  await page.goto(href(''));
+  assert.equal(await page.locator('#gallery .gallery-card').count(),3);
+  for (const width of [375, 768, 1024, 1440]) {
+    await page.setViewportSize({width,height:900});
+    await page.goto(href(galleries[0]));
+    await page.emulateMedia({reducedMotion:'reduce'});
+    const trigger = page.locator('[data-gallery-photo]').first();
+    assert.equal(await page.locator('[data-gallery-photo]').count(),4);
+    await trigger.click();
+    const dialog = page.getByRole('dialog');
+    await dialog.waitFor({state:'visible'});
+    assert.equal(await page.locator('[data-counter]').innerText(),'1 of 4');
+    assert.equal(await page.evaluate(() => document.body.style.position),'fixed');
+    await page.keyboard.press('ArrowLeft');
+    assert.equal(await page.locator('[data-counter]').innerText(),'4 of 4');
+    await page.keyboard.press('ArrowRight');
+    assert.equal(await page.locator('[data-counter]').innerText(),'1 of 4');
+    await dialog.getByRole('button',{name:'Next photo',exact:true}).click();
+    assert.equal(await page.locator('[data-counter]').innerText(),'2 of 4');
+    await page.keyboard.press('Tab');
+    assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('data-close')),'');
+    await page.keyboard.press('Shift+Tab');
+    assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('data-next')),'');
+    await page.waitForFunction(() => document.querySelector('[data-image-slot] img')?.complete);
+    assert.equal(await page.locator('[data-image-slot] img').evaluate(img => getComputedStyle(img).objectFit),'contain');
+    const audit = await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+    assert.deepEqual(audit.violations.map(v=>v.id),[]);
+    await page.screenshot({path:`${output}/gallery-viewer-${width}.png`});
+    await page.keyboard.press('Escape');
+    await dialog.waitFor({state:'hidden'});
+    assert.equal(await trigger.evaluate(el => document.activeElement===el),true);
+    assert.notEqual(await page.evaluate(() => document.body.style.position),'fixed');
+    await trigger.click();
+    await dialog.getByRole('button',{name:'Close photo viewer'}).click();
+    await dialog.waitFor({state:'hidden'});
+    assert.equal(await page.getByRole('button',{name:'Open navigation',exact:true}).isVisible(),width<1280);
+  }
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  const plain = await browser.newContext({javaScriptEnabled:false});
+  const plainPage = await plain.newPage();
+  await plainPage.goto(href(galleries[0]));
+  await plainPage.locator('[data-gallery-photo]').first().click();
+  assert.ok(plainPage.url().endsWith('.webp'));
+  await plain.close();
+  assert.equal((await page.goto(href('gallery/missing-album/'))).status(),404);
+  result.interactions.push('Gallery ordering, previews, full-screen viewer, focus, keyboard wrap, responsive menu, and no-JavaScript photos');
+  for (const route of [...events, ...stories, ...galleries]) {
     await page.goto(href(route));
     assert.equal((await page.reload()).status(), 200, `Direct refresh failed: ${route}`);
   }
@@ -225,7 +274,7 @@ try {
   const nav = page.locator('#main-navigation');
   await page.waitForFunction(() => document.querySelector('[data-nav-path="#about"]')?.getAttribute('aria-current') === 'location');
   assert.equal(await nav.getByRole('link', {name:'Home',exact:true,includeHidden:true}).getAttribute('aria-current'), null);
-  assert.deepEqual(await nav.getByRole('link', {includeHidden:true}).allTextContents(), ['Home','About Us','Our Services','Our Team','Events','Stories','Contact']);
+  assert.deepEqual(await nav.getByRole('link', {includeHidden:true}).allTextContents(), ['Home','About Us','Our Services','Our Team','Events','Stories','Gallery','Contact']);
   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false');
   await page.goto(href('about/'));
   await page.waitForURL(href('#about'));

@@ -104,9 +104,9 @@
   .program-grid > article { border-bottom: none; border-right: 1px solid #203e3220; }
   .program-grid > article:last-child { border-right: none; }
 }
-@media (max-width: 1023px) {
+@media (max-width: 1279px) {
   .desktop-nav { display: none; }
-  .desktop-nav.is-open { display: flex; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; padding: 20px 24px 28px; background: #faf8f1; border-bottom: 1px solid #203e3220; box-shadow: 0 10px 20px #203e3210; gap: 0; }
+  .desktop-nav.is-open { display: flex; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; padding: 20px 24px 28px; background: #faf8f1; border-bottom: 1px solid #203e3220; box-shadow: 0 10px 20px #203e3210; gap: 0; max-height: calc(100dvh - var(--site-header-height, 140px)); overflow-y: auto; }
   .desktop-nav.is-open a { padding: 14px 0; }
   .desktop-nav a:is([aria-current='page'], [aria-current='location'])::after { display: none; }
   .hero-photo { border-top-left-radius: 90px; }

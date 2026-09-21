@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { albumPhotos } from '../lib/gallery';
+import { url, dateLabel } from '../lib/site';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+interface Props { album: CollectionEntry<'gallery'>; index?: number; }
+const { album, index = 0 } = Astro.props;
+const cover = (await albumPhotos(album)).find(photo => photo.filename === album.data.cover)!;
+---
+<article class="gallery-card" data-reveal data-reveal-delay={(index % 3) * 100}>
+  <a class="card-photo" href={url(`gallery/${album.id}/`)} tabindex="-1" aria-hidden="true"><Photo photo={cover}/><span class="photo-badge">{album.data.images.length} photos</span></a>
+  <div class="pt-6"><p class="card-category">{album.data.sample ? 'Sample album · Illustrative date' : 'Photo album'}</p><h3><a href={url(`gallery/${album.id}/`)}>{album.data.title}</a></h3><p class="mt-3 text-xs text-muted"><time datetime={album.data.date.toISOString().slice(0,10)}>{dateLabel(album.data.date)}</time></p><a class="text-link mt-5" href={url(`gallery/${album.id}/`)}>View album <Icon name="arrow"/></a></div>
+</article>
