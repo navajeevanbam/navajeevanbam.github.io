@@ -1,11 +1,13 @@
 ---
+import { site } from '../config';
 import Layout from '../layouts/Layout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
-import { programs, url } from '../lib/site';
+import { programs } from '../config';
+import { url } from '../lib/site';
 ---
-<Layout title="Make a contribution" description="Explore how your kindness could support education, nourishing meals, elder companionship, and community wellbeing at Navjeen Seva Ashram." active="donation/">
+<Layout title="Make a contribution" description={`Explore how your kindness could support education, nourishing meals, elder companionship, and community wellbeing at ${site.name}.`} active="donation/">
   <PageIntro eyebrow="A little generosity goes a long way" title="Be someone’s new beginning." description="A warm meal. A new book. An afternoon of companionship. Your willingness to care is where change begins."/>
   <section class="container section-space"><div class="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16"><div><Photo name="food" eager class="aspect-[1.5] w-full rounded-3xl"/><h2 class="mt-8">Give with heart.<br/>Help hope grow.</h2><p class="mt-5 text-muted">We are building a community where care feels personal. Your support could help us create thoughtful opportunities for learning, nourishment, connection, and wellbeing.</p><div class="mt-7 flex items-start gap-3 rounded-xl bg-[#efeee4] p-5"><Icon name="heart" class="mt-1 shrink-0 text-[#9b7437]"/><p class="text-sm text-muted">This is a preview of our giving experience. Real donation methods and verified information about how funds are used will be added before contributions are accepted.</p></div></div>
     <div class="content-card h-fit p-6 sm:p-9"><p class="eyebrow">Choose your kindness</p><h2 class="text-3xl">Every contribution matters.</h2><p class="mt-3 text-sm text-muted">Try the donation experience below.</p><form id="donation-form" class="mt-7" data-demo-form>

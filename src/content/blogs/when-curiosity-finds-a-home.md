@@ -4,7 +4,7 @@ excerpt: "Books, patient guidance, and a little encouragement can make learning 
 date: "2026-08-29"
 image: "education"
 category: "Learning & possibility"
-author: "The Navjeen editorial team"
+author: "The Navajeevan editorial team"
 readTime: 2
 ---
 

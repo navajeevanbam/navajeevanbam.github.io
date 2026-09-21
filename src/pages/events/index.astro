@@ -1,4 +1,5 @@
 ---
+import { site } from '../../config';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PageIntro from '../../components/PageIntro.astro';
@@ -6,7 +7,7 @@ import EventCard from '../../components/EventCard.astro';
 import JoinBanner from '../../components/JoinBanner.astro';
 const events = (await getCollection('events')).sort((a,b) => a.data.status !== b.data.status ? (a.data.status === 'upcoming' ? -1 : 1) : a.data.status === 'upcoming' ? +a.data.date - +b.data.date : +b.data.date - +a.data.date);
 ---
-<Layout title="Events & gatherings" description="Explore community gatherings at Navjeen Seva Ashram, from shared meals and reading afternoons to garden days and elder companionship." active="events/">
+<Layout title="Events & gatherings" description={`Explore community gatherings at ${site.name}, from shared meals and reading afternoons to garden days and elder companionship.`} active="events/">
   <PageIntro eyebrow="Come together. Give together." title="Make a little time for togetherness." description="A shared meal, a story, a morning in the garden. Discover the moments that could bring our community closer."/>
   <section class="container section-space"><div class="mb-9 flex flex-wrap items-center justify-between gap-5"><div id="event-filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter events" hidden><button class="filter-button" type="button" data-filter="all" aria-pressed="true">All gatherings</button><button class="filter-button" type="button" data-filter="upcoming" aria-pressed="false">Upcoming</button><button class="filter-button" type="button" data-filter="past" aria-pressed="false">Past gatherings</button></div><p id="event-count" class="text-xs text-muted" aria-live="polite">6 gatherings to explore</p></div><p class="demo-note mb-8">These are sample events with illustrative dates and venues. Please wait for confirmed event details before planning a visit.</p><div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">{events.map(event => <EventCard event={event}/>)}</div></section><JoinBanner/>
 </Layout>

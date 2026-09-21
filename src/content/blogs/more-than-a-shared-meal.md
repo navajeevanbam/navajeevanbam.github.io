@@ -4,7 +4,7 @@ excerpt: "A simple plate of food can make room for connection, comfort, and belo
 date: "2026-09-05"
 image: "food"
 category: "Everyday care"
-author: "The Navjeen editorial team"
+author: "The Navajeevan editorial team"
 readTime: 2
 ---
 

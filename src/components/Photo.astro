@@ -1,5 +1,6 @@
 ---
-import { photos, url } from '../lib/site';
+import { photos } from '../config';
+import { url } from '../lib/site';
 interface Props { name: string; class?: string; eager?: boolean; }
 const { name, class: className = '', eager = false } = Astro.props;
 const photo = photos[name];

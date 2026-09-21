@@ -4,13 +4,13 @@ excerpt: "Sometimes, the most meaningful thing we can offer is our undivided att
 date: "2026-09-12"
 image: "elders"
 category: "Human connections"
-author: "The Navjeen editorial team"
+author: "The Navajeevan editorial team"
 readTime: 2
 ---
 
 We often imagine that making a difference requires a grand gesture. But connection usually begins in smaller ways: remembering a name, pulling up a chair, or making time for a conversation without watching the clock.
 
-At the heart of our vision for Navjeen Seva Ashram is this simple idea. People need practical support, and they also need to feel seen. The two belong together.
+At the heart of our vision for Navajeevan Seva Ashram is this simple idea. People need practical support, and they also need to feel seen. The two belong together.
 
 ## Listening is an act of care
 

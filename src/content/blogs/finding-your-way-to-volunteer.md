@@ -4,7 +4,7 @@ excerpt: "Your skills, your time, and your everyday interests can all be a start
 date: "2026-07-18"
 image: "community"
 category: "Volunteering"
-author: "The Navjeen editorial team"
+author: "The Navajeevan editorial team"
 readTime: 2
 ---
 

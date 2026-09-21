@@ -4,7 +4,7 @@ excerpt: "What planting a few seeds can teach us about patience and shared respo
 date: "2026-08-15"
 image: "volunteers"
 category: "Community life"
-author: "The Navjeen editorial team"
+author: "The Navajeevan editorial team"
 readTime: 2
 ---
 

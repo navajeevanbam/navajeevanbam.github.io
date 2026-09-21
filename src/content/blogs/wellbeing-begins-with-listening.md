@@ -4,7 +4,7 @@ excerpt: "Creating welcoming spaces where neighbours feel comfortable asking for
 date: "2026-08-01"
 image: "health"
 category: "Health & wellbeing"
-author: "The Navjeen editorial team"
+author: "The Navajeevan editorial team"
 readTime: 2
 ---
 

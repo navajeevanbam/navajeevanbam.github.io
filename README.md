@@ -1,4 +1,4 @@
-# Navjeen Seva Ashram
+# Navajeevan Seva Ashram
 
 A fully static community-welfare website built with Astro, TypeScript, and Tailwind CSS. Includes a landing page, About, Donation, Contact, six events, six articles, and a custom 404 page.
 
@@ -24,7 +24,13 @@ The production output is `dist/`. It consists only of HTML, CSS, JavaScript, fon
 
 ## Content and images
 
-- `src/lib/site.ts`: organization information, program descriptions, photo metadata, and base-aware URL helper.
+- `src/config/site.ts`: NGO name, short name, city, address lines, phones, emails, community link, and logo asset. Shared by the header, footer, contact page, and page metadata.
+- `src/config/navigation.ts`: navigation links; adding an entry updates desktop and mobile menus.
+- `src/config/programs.ts`: program cards; add an object to extend the list.
+- `src/config/photos.ts`: image paths and accessible descriptions.
+- `src/lib/site.ts`: URL and date formatting helpers only.
+
+Config files are typed TypeScript. Add phone/email entries to their arrays and all contact lists update automatically. Address lines are rendered as separate lines in the footer and joined on the contact page. Store logo/image files in `public/` and use paths relative to that folder. Logo lettering is part of the image, so changing the organization name also requires an updated logo image. Blog/event prose remains editable Markdown under `src/content/`; other page-specific copy remains in `src/pages/`. Run `npm run check` and rebuild for deployment after editing config.
 - `src/content/events/`: Markdown events; filenames become public event IDs. Each event includes title, excerpt, date, image key, category, status (`upcoming` or `past`), location, time, and schedule. Update status manually when an event passes, then rebuild.
 - `src/content/blogs/`: Markdown articles; filenames become public blog IDs. Include title, excerpt, date, image key, category, author, and estimated reading time in minutes.
 - `src/content.config.ts`: schemas validated during builds.
@@ -34,7 +40,7 @@ The production output is `dist/`. It consists only of HTML, CSS, JavaScript, fon
 
 Available image keys: `community`, `education`, `food`, `elders`, `health`, and `volunteers`. All generated photos are fictional illustrations. Replace the appropriate WebP and update alt text when using real photography. Font files are bundled locally by the build.
 
-All stories, event dates, venues, contact details, and impact figures are placeholders. Replace and verify them before presenting the website as an operating NGO. Do not add tax benefits, registrations, or financial claims without verification.
+The NGO name, address, phone numbers, and emails have been supplied by the organization. Stories, event dates, venues, and impact figures remain placeholders. Replace and verify them before presenting the website as an operating NGO. Do not add tax benefits, registrations, or financial claims without verification.
 
 ## Interactive demos
 
