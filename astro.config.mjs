@@ -9,6 +9,7 @@ export default defineConfig({
   output: 'static',
   site: process.env.SITE_URL || (owner ? `https://${owner}.github.io` : undefined),
   base: process.env.BASE_PATH || defaultBase,
-  trailingSlash: 'always',
+  // Accept both URL forms so missing paths reach the custom 404 in dev too.
+  trailingSlash: 'ignore',
   vite: { plugins: [tailwindcss()] },
 });

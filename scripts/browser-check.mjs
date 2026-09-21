@@ -45,13 +45,14 @@ try {
       const response = await page.goto(href(route));
       assert.equal(response.status(), 200, `${route} did not load`);
       await page.evaluate(() => document.fonts.ready);
+      assert.ok(await page.locator('#main [data-reveal]').count() > 0, `Missing scroll reveals: ${route}`);
       // Load below-fold images for a complete screenshot without changing source markup.
       await page.evaluate(() => { for (const img of document.images) img.loading = 'eager'; });
       await page.waitForFunction(() => [...document.images].every(img => img.complete && img.naturalWidth > 0));
       await page.evaluate(async () => { await Promise.all([...document.images].map(img => img.decode())); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Horizontal overflow: ${route} at ${width}px`);
-      if (route === '' || (width === 375 || width === 1440) && ['donation/','contact/',events[0],stories[0]].includes(route)) {
-        if (route === '') {
+      if (route === '' || (width === 375 || width === 1440) && ['donation/','contact/','404.html',events[0],stories[0]].includes(route)) {
+        if (await page.locator('[data-reveal]').count()) {
           for (const item of await page.locator('[data-reveal]').all()) {
             await item.evaluate(el => el.scrollIntoView({behavior:'instant',block:'center'}));
             await page.waitForFunction(() => [...document.querySelectorAll('[data-reveal]')].filter(el => {const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight-120;}).every(el => el.dataset.revealed === 'true'));
@@ -62,9 +63,13 @@ try {
       }
       result.layouts.push({ route, width, passed: true });
       if (width === 1440) {
+        // Audit the fully revealed reading state, not transient fade opacity.
+        await page.emulateMedia({reducedMotion:'reduce'});
+        await page.waitForFunction(() => !document.documentElement.classList.contains('reveal-ready'));
         const audit = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
         const violations = audit.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, summary: n.failureSummary })) }));
         result.accessibility.push({ route, violations });
+        await page.emulateMedia({reducedMotion:'no-preference'});
       }
     }
   }
@@ -168,6 +173,13 @@ try {
   result.interactions.push('Event filters: all, upcoming, and past');
 
   await page.goto(href('donation/'));
+  const bankCard = page.locator('.bank-card').first();
+  assert.equal(await bankCard.evaluate(el => getComputedStyle(el).opacity), '0');
+  await bankCard.evaluate(el => el.scrollIntoView({behavior:'instant',block:'center'}));
+  await page.waitForFunction(() => document.querySelector('.bank-card').dataset.revealed === 'true');
+  assert.equal(await bankCard.evaluate(el => el.getAnimations()[0]?.effect?.getTiming().duration),600);
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.bank-card')).opacity === '1');
+  result.interactions.push('Shared reveal timing and hidden initial state on donation page');
   assert.deepEqual(await page.locator('[data-sponsor-amount]').evaluateAll(items => items.map(item => Number(item.dataset.sponsorAmount))), [2000,2500,4000,6000,12000,10000,12000,2000,500]);
   const bankDetails = await page.locator('.bank-grid').innerText();
   for (const value of ['4794000100023666','PUNB0479400','293110100044278','UBIN0829315','84048316367','SBIN0RRUKGB']) assert.ok(bankDetails.includes(value), `Missing published bank detail: ${value}`);
@@ -246,7 +258,7 @@ try {
 
 
   assert.equal((await page.goto(href('not-a-real-page/'))).status(),404);
-  assert.match(await page.locator('h1').innerText(),/find your way home/);
+  assert.match(await page.locator('h1').innerText(),/find your\s+way home/);
   assert.ok((await page.getByRole('link',{name:'Back to the Ashram'}).getAttribute('href')).startsWith(base+'/'));
   const noJs = await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:812}});
   const staticPage=await noJs.newPage();

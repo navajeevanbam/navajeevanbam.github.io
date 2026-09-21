@@ -44,9 +44,9 @@ Available image keys: `community`, `education`, `food`, `elders`, `health`, and 
 
 The NGO name, address, phone numbers, and emails remain as configured. The homepage, three historical 2022 projects, and five service summaries use content verified against https://www.navajeevanbam.com/home on 21 September 2026. Ten reference photographs are optimized locally under `public/images/reference/`; original URLs are recorded in configuration. Sample stories and events are explicitly labeled. Current service counts and schedules have not been inferred from the historical reference. Donation amounts and bank details are transcribed from the main website’s donation section. Do not add tax benefits, registrations, or financial claims without verification.
 
-## Homepage motion
+## Site-wide motion
 
-Motion follows the reference website: sections rise 100px over 600ms with ease-in-out timing, cards use staggered delays, and team portraits zoom from 60% scale. Hero headings and descriptions fade downward over one second; the button rises with a 400ms delay. These text entrances replay on each slide. Scroll reveals play once, with pending items hidden before first paint to prevent flashes. A script-load fallback restores visibility if initialization fails. Content remains visible without JavaScript; reduced-motion preferences disable reveals, and keyboard focus immediately reveals the focused content.
+Motion follows the reference website: sections rise 100px over 600ms with ease-in-out timing, cards use staggered delays, and team portraits zoom from 60% scale. Hero headings and descriptions fade downward over one second; the button rises with a 400ms delay. These text entrances replay on each slide. The shared layout enables the same scroll reveals on all content pages. Scroll reveals play once, with pending items hidden before first paint to prevent flashes. A script-load fallback restores visibility if initialization fails. Content remains visible without JavaScript; reduced-motion preferences disable reveals, and keyboard focus immediately reveals the focused content.
 
 ## Interactive demos
 

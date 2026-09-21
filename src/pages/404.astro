@@ -3,7 +3,76 @@ import { site } from '../config';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import { url } from '../lib/site';
+const destinations = [
+  { title: 'Get to know us', description: 'The people and purpose behind our Ashram.', href: '#about', icon: 'heart' },
+  { title: 'Read our stories', description: 'Discover the many ways our community cares.', href: 'stories/', icon: 'book' },
+  { title: 'Start a conversation', description: 'A question, a visit, or a little help finding your way.', href: 'contact/', icon: 'mail' },
+];
 ---
-<Layout title="Let’s find your way home" description={`This page could not be found. Return to ${site.name}’s homepage or explore our community events.`} active="404">
-  <section class="container py-24 text-center"><span class="mx-auto mb-7 flex size-20 items-center justify-center rounded-full bg-[#eee9d6]"><Icon name="sun" class="size-9"/></span><p class="mb-5 text-xs font-semibold uppercase tracking-[.2em]">404 · A little off the path</p><h1>Let’s find your way home.</h1><p class="mx-auto mt-6 max-w-lg text-muted">The page you are looking for may have moved, or the link may be incomplete. There is still plenty of kindness to discover.</p><div class="mt-8 flex flex-wrap justify-center gap-3"><a href={url()} class="button button-dark">Back to the Ashram <Icon name="arrow"/></a><a href={url('events/')} class="button button-outline">Explore our gatherings</a></div></section>
+<Layout title="Let’s find your way home" description={`This page could not be found. Find your way back to ${site.name}, read our stories, or get in touch.`} active="404">
+  <section class="container lost-page" aria-labelledby="lost-title">
+    <div class="lost-hero">
+      <div class="lost-art" data-reveal aria-hidden="true">
+        <svg viewBox="0 0 540 430" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <ellipse cx="270" cy="221" rx="233" ry="190" fill="#eeecdf"/>
+          <circle cx="405" cy="99" r="35" fill="#f4b55b"/>
+          <path d="M397 44v-9M453 99h9M442 62l7-7M443 136l7 7" stroke="#b18548" stroke-width="2" stroke-linecap="round"/>
+          <path d="M72 106h72m-54-12h35M329 52h35" stroke="#c6cabb" stroke-width="2" stroke-linecap="round"/>
+          <text x="43" y="290" fill="#203e32" font-family="Lora, Georgia, serif" font-size="188" letter-spacing="-10">4</text>
+          <text x="365" y="290" fill="#203e32" font-family="Lora, Georgia, serif" font-size="188" letter-spacing="-10">4</text>
+          <path d="M192 292V184a78 78 0 0 1 156 0v108H192Z" fill="#203e32"/>
+          <path d="M207 292V185a63 63 0 0 1 126 0v107H207Z" fill="#d6dfcc"/>
+          <path d="M207 258c37-28 72-33 126-9v43H207v-34Z" fill="#a6b89b"/>
+          <path d="M207 281c39-18 81-18 126 3v8H207v-11Z" fill="#779570"/>
+          <path d="M207 292V184c0-19 8-36 22-48l51 20v155l-73-19Z" fill="#345542"/>
+          <path d="M222 180v98l42 10V173l-42-14v21Z" stroke="#7a9276" stroke-width="1.5"/>
+          <circle cx="266" cy="231" r="3" fill="#f4b55b"/>
+          <path d="M280 293c-9 30 68 33 64 62-4 27-80 27-86 55" stroke="#faf8f1" stroke-width="32"/>
+          <path d="M93 309h112m126 0h116" stroke="#a9b4a0" stroke-width="2" stroke-linecap="round"/>
+          <path d="M117 323c-1-30-10-56-30-79m30 64c11-25 22-35 39-43" stroke="#54754d" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M102 276c-28 1-40-14-40-34 24 1 38 12 40 34Zm15 26c24 0 40-15 41-38-24 4-38 16-41 38Z" fill="#809770"/>
+          <path d="M431 326c-1-27 4-42 17-57" stroke="#54754d" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M435 298c-19-2-29-12-29-29 20 4 29 14 29 29Zm3-7c20-1 31-11 33-27-19 0-30 10-33 27Z" fill="#809770"/>
+          <path d="M157 80c7-6 13-6 19 0 6-6 12-6 19 0" stroke="#54754d" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="168" cy="351" r="3" fill="#bda782"/><circle cx="385" cy="339" r="3" fill="#bda782"/>
+        </svg>
+        <p class="lost-art-caption">A little detour. The same warm welcome.</p>
+      </div>
+      <div class="lost-copy" data-reveal data-reveal-delay="150">
+        <p class="eyebrow">404 · A little off the path</p>
+        <h1 id="lost-title">Let’s find your<br/>way <em>home.</em></h1>
+        <p class="lost-description">This page seems to have wandered off. The link may have changed, but there’s always a place for you at {site.name}.</p>
+        <a class="button button-dark" href={url()}>Back to the Ashram <Icon name="arrow"/></a>
+        <p class="lost-help">Looking for something specific? <a href={url('contact/')}>Let us help.</a></p>
+      </div>
+    </div>
+    <div class="lost-explore">
+      <div class="lost-explore-heading" data-reveal><p class="eyebrow">A few good places to begin</p><span>Follow a little curiosity.</span></div>
+      <div class="lost-links">{destinations.map((destination, index) => <a class="lost-link" href={url(destination.href)} data-reveal data-reveal-delay={index * 100}><span class="lost-link-icon"><Icon name={destination.icon}/></span><div><h2>{destination.title}</h2><p>{destination.description}</p></div><Icon name="arrow" class="lost-link-arrow"/></a>)}</div>
+    </div>
+  </section>
 </Layout>
+<style>
+  .lost-page { padding-top:64px; padding-bottom:88px; }
+  .lost-hero { display:grid; grid-template-columns:1.05fr 1fr; gap:64px; align-items:center; }
+  .lost-art svg { width:100%; height:auto; display:block; }
+  .lost-art-caption { margin-top:8px; text-align:center; font-size:11px; letter-spacing:.04em; color:#5c685f; }
+  .lost-copy h1 { font-size:clamp(2.9rem,5vw,4.7rem); line-height:1.1; }
+  .lost-copy h1 em { font-weight:400; color:#896332; }
+  .lost-description { max-width:420px; margin:24px 0 28px; font-size:15px; color:#5c685f; }
+  .lost-help { margin-top:22px; font-size:12px; color:#5c685f; }
+  .lost-help a { color:#203e32; text-decoration:underline; text-underline-offset:4px; }
+  .lost-explore { margin-top:64px; padding-top:32px; border-top:1px solid #203e3220; }
+  .lost-explore-heading { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:24px; }
+  .lost-explore-heading .eyebrow { margin:0; }
+  .lost-explore-heading > span { color:#5c685f; font-size:12px; }
+  .lost-links { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+  .lost-link { display:flex; align-items:flex-start; gap:14px; padding:24px 20px; border:1px solid #203e3220; border-radius:16px; background:#fffdf7; transition:background .2s,border-color .2s; }
+  .lost-link:hover { background:#efeee3; border-color:#203e3260; color:#203e32; }
+  .lost-link-icon { display:grid; place-items:center; flex:none; width:38px; height:38px; border-radius:50%; background:#ecebda; color:#203e32; }
+  .lost-link h2 { font-size:19px; line-height:1.3; letter-spacing:-.02em; }
+  .lost-link p { margin-top:7px; font-size:12px; line-height:1.65; color:#5c685f; }
+  .lost-link-arrow { flex:none; width:16px; margin-top:10px; color:#203e32; }
+  @media(max-width:1023px) { .lost-hero { gap:32px; } .lost-links { grid-template-columns:1fr; } .lost-link { align-items:center; } .lost-link-arrow { margin-left:auto; } }
+  @media(max-width:767px) { .lost-page { padding-top:28px; padding-bottom:56px; } .lost-hero { grid-template-columns:1fr; gap:36px; } .lost-art { max-width:400px; width:100%; margin:auto; } .lost-copy { text-align:center; } .lost-copy .eyebrow { justify-content:center; } .lost-description { margin-left:auto; margin-right:auto; } .lost-explore { margin-top:48px; } .lost-explore-heading > span { display:none; } }
+</style>

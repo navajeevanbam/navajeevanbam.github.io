@@ -10,5 +10,5 @@ const stories = (await getCollection('stories')).sort(sortStories);
 ---
 <Layout title="Stories from our community" description={`Read thoughtful stories about everyday kindness, shared meals, learning, volunteering, and the spirit of ${site.name}.`} active="stories/">
   <PageIntro eyebrow="Notes from our community" title="Little stories. A lot of heart." description="Reflections on kindness, connection, and the everyday moments that remind us what it means to care."/>
-  <section class="container section-space"><div class="mb-9 flex flex-wrap items-center justify-between gap-4"><p class="eyebrow mb-0">The community journal</p><p class="text-xs text-muted">Services and community stories · Sample articles are labeled</p></div><div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">{stories.map(story => <StoryCard story={story}/>)}</div></section><JoinBanner/>
+  <section class="container section-space"><div class="mb-9 flex flex-wrap items-center justify-between gap-4"><p class="eyebrow mb-0">The community journal</p><p class="text-xs text-muted">Services and community stories · Sample articles are labeled</p></div><div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">{stories.map((story, index) => <StoryCard revealDelay={(index % 3) * 100} story={story}/>)}</div></section><JoinBanner/>
 </Layout>
