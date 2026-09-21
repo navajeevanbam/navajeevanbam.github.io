@@ -4,6 +4,7 @@ import { createServer } from 'node:http';
 import { readFile, stat, readdir, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, join, extname } from 'node:path';
 import assert from 'node:assert/strict';
+import { checkContact } from './check-contact-browser.mjs';
 
 const root = resolve('dist');
 const base = (process.env.BASE_PATH || '/').replace(/\/$/, '');
@@ -240,23 +241,8 @@ try {
   assert.equal(await page.locator('#donation-form').count(),0);
   result.interactions.push('Published sponsorship prices, all three bank accounts, and original downloadable QR image');
 
-  await page.goto(href('contact/'));
-  const sent = [];
-  page.on('request', request => { if (request.method() !== 'GET') sent.push(request.url()); });
-  await page.getByRole('button',{name:'Preview my enquiry'}).click();
-  assert.equal(await page.locator('#contact-result').isVisible(),false);
-  await page.getByLabel('Your name').fill('Sample Visitor');
-  await page.getByLabel('Email address').fill('invalid');
-  assert.equal(await page.locator('#contact-email').evaluate(el => el.validity.valid),false);
-  await page.getByLabel('Email address').fill('visitor@example.org');
-  await page.getByLabel('What brings you here?').selectOption('Volunteering');
-  await page.getByLabel('Your message').fill('I would like to learn about future volunteering opportunities.');
-  await page.getByRole('button',{name:'Preview my enquiry'}).click();
-  assert.match(await page.locator('#contact-result').innerText(),/no message was sent or stored/);
-  assert.equal(await page.locator('#contact-name').inputValue(),'');
-  assert.equal(sent.length,0);
-  assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length),0);
-  result.interactions.push('Contact required fields, email validation, demo feedback, and no storage or submission');
+  await checkContact(page, href, output);
+  result.interactions.push('Contact validation, inactive placeholder, confirmed success, preserved errors, retries, timeout, and duplicate prevention');
 
   await page.setViewportSize({width:375,height:812});
   await page.goto(href(''));
@@ -318,7 +304,7 @@ try {
   assert.equal(await staticPage.locator('.slider-controls').isVisible(),false);
   assert.equal(await staticPage.locator('.project-card').first().evaluate(el => getComputedStyle(el).opacity),'1');
   await staticPage.goto(href('contact/'));
-  assert.equal(await staticPage.getByRole('button',{name:'Preview my enquiry'}).isDisabled(),true);
+  assert.equal(await staticPage.getByRole('button',{name:'Send message'}).isDisabled(),true);
   await noJs.close();
   result.interactions.push('Static 404 recovery and no-JavaScript navigation');
   assert.deepEqual(errors,[],'Browser JavaScript errors');
