@@ -3,7 +3,8 @@ sample: true
 title: "When curiosity finds a place to grow"
 excerpt: "Books, patient guidance, and a little encouragement can make learning feel like possibility."
 date: "2026-08-29"
-image: "education"
+image: "cover.webp"
+imageAlt: "A volunteer reading with children in a community learning room"
 category: "Learning & possibility"
 author: "The Navajeevan editorial team"
 readTime: 2

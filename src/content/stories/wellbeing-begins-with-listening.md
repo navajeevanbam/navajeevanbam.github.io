@@ -3,7 +3,8 @@ sample: true
 title: "Wellbeing begins with being heard"
 excerpt: "Creating welcoming spaces where neighbours feel comfortable asking for support."
 date: "2026-08-01"
-image: "health"
+image: "cover.webp"
+imageAlt: "A health volunteer checking an older community member’s blood pressure"
 category: "Health & wellbeing"
 author: "The Navajeevan editorial team"
 readTime: 2

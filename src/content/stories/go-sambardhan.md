@@ -2,7 +2,9 @@
 title: "Go-Sambardhan"
 excerpt: "Food and healthcare for cows and calves at Navajeevan Goshala."
 category: "Our services"
-image: "reference-cows"
+image: "cover.webp"
+imageAlt: "Cows at Navajeevan Goshala"
+imageSource: "https://www.navajeevanbam.com/assets/images/Goshala.jpeg"
 sample: false
 source: "https://www.navajeevanbam.com/home"
 ---

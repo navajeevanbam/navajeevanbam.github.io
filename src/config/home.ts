@@ -1,6 +1,6 @@
 interface Slide { image: string; eyebrow: string; title: string; description: string; cta: string; }
 interface Value { title: string; icon: string; description: string; }
-interface Service { id: string; title: string; image: string; description: string; }
+interface Service { id: string; title: string; description: string; }
 interface TeamMember { name: string; role: string; image: string; }
 interface HomeConfig {
   slides: Slide[]; about: { title: string; paragraphs: string[]; images: { image: string; caption: string }[] };
@@ -35,11 +35,11 @@ export const home: HomeConfig = {
     { title: 'Support', icon: 'bowl', description: 'Give what you can. Small acts of generosity help sustain everyday care.' },
   ],
   services: [
-    { id: 'childrens-welfare', title: 'Children’s Welfare', image: 'reference-children', description: 'A caring home, nourishing meals, and opportunities to learn for children in need.' },
-    { id: 'veda-vidyalay', title: 'Veda Vidyalay', image: 'reference-learning', description: 'Preserving Atharva Veda learning through the Gurukul Ashram tradition.' },
-    { id: 'go-sambardhan', title: 'Go-Sambardhan', image: 'reference-cows', description: 'Food, shelter, and healthcare for cows and calves at Navajeevan Goshala.' },
-    { id: 'annalaxmi-for-widows', title: 'Annalaxmi for Widows', image: 'reference-women', description: 'Ration support for older women without dependable family or financial support.' },
-    { id: 'ahalya-nivas', title: 'Ahalya Nivas', image: 'reference-women', description: 'Shelter and everyday care for older women who need a home and companionship.' },
+    { id: 'childrens-welfare', title: 'Children’s Welfare', description: 'A caring home, nourishing meals, and opportunities to learn for children in need.' },
+    { id: 'veda-vidyalay', title: 'Veda Vidyalay', description: 'Preserving Atharva Veda learning through the Gurukul Ashram tradition.' },
+    { id: 'go-sambardhan', title: 'Go-Sambardhan', description: 'Food, shelter, and healthcare for cows and calves at Navajeevan Goshala.' },
+    { id: 'annalaxmi-for-widows', title: 'Annalaxmi for Widows', description: 'Ration support for older women without dependable family or financial support.' },
+    { id: 'ahalya-nivas', title: 'Ahalya Nivas', description: 'Shelter and everyday care for older women who need a home and companionship.' },
   ],
   team: [
     { name: 'Dr. K. Sridhar Acharya', role: 'Founder & President, Navajeevan Blind Relief Centre, Tirupati (AP)', image: 'reference-acharya' },

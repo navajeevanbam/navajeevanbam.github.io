@@ -3,7 +3,8 @@ sample: true
 title: "The quiet kindness of simply showing up"
 excerpt: "Sometimes, the most meaningful thing we can offer is our undivided attention."
 date: "2026-09-12"
-image: "elders"
+image: "cover.webp"
+imageAlt: "An elderly woman and a young volunteer enjoying a conversation in a garden"
 category: "Human connections"
 author: "The Navajeevan editorial team"
 readTime: 2

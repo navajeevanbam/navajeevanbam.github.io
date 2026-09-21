@@ -1,6 +1,5 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { photos } from './config/photos';
 import { glob } from 'astro/loaders';
 
 const shared = {
@@ -8,7 +7,9 @@ const shared = {
   excerpt: z.string(),
   sample: z.boolean(),
   source: z.url().optional(),
-  image: z.string().refine(key => key in photos, 'Unknown photo key'),
+  image: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\.(webp|jpe?g|png)$/, 'Use a local image filename such as cover.webp'),
+  imageAlt: z.string().trim().min(1, 'Describe the image in imageAlt'),
+  imageSource: z.url().optional(),
   category: z.string(),
 };
 

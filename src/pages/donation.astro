@@ -7,10 +7,10 @@ import Photo from '../components/Photo.astro';
 import { url } from '../lib/site';
 const rupees = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 ---
-<Layout title="Donate to a new beginning" description={`Support meals, education, care for older women, and Navajeevan Goshala. Find sponsorship options and donation details for ${site.name}.`} active="donation/" image="reference-meals">
+<Layout title="Donate to a new beginning" description={`Support meals, education, care for older women, and Navajeevan Goshala. Find sponsorship options and donation details for ${site.name}.`} active="donation/" image="donation-meals">
   <section class="container section-space donation-intro">
     <div data-reveal><p class="eyebrow">Give with love · {site.name}</p><h1>Your kindness.<br/>Someone’s new beginning.</h1><p class="intro-copy">A meal shared. A child learning. A place to call home. Your support helps sustain everyday care within and around our Ashram.</p><div class="mt-8 flex flex-wrap gap-3"><a class="button button-dark" href="#ways-to-give">Make a donation <Icon name="heart"/></a><a class="button button-outline" href="#sponsorships">Explore sponsorships <Icon name="arrow"/></a></div><p class="mt-6 text-xs text-muted">Mark a special occasion with an act of care.</p></div>
-    <figure data-reveal data-reveal-delay="250"><Photo name="reference-meals" eager class="w-full rounded-3xl aspect-[1.2]"/><figcaption class="mt-3 text-xs text-muted">Annadaan — a shared meal at Navajeevan Seva Ashram.</figcaption></figure>
+    <figure data-reveal data-reveal-delay="250"><Photo name="donation-meals" eager class="w-full rounded-3xl aspect-[1.2]"/><figcaption class="mt-3 text-xs text-muted">Annadaan — a shared meal at Navajeevan Seva Ashram.</figcaption></figure>
   </section>
 
   <section id="sponsorships" class="section-space bg-[#efeee4]"><div class="container">

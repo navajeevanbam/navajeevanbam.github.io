@@ -3,7 +3,8 @@ sample: true
 title: "More than a meal: the joy of a shared table"
 excerpt: "A simple plate of food can make room for connection, comfort, and belonging."
 date: "2026-09-05"
-image: "food"
+image: "cover.webp"
+imageAlt: "Volunteers sharing a freshly prepared meal with a community member"
 category: "Everyday care"
 author: "The Navajeevan editorial team"
 readTime: 2

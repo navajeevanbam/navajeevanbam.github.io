@@ -11,7 +11,7 @@ export const donation = {
   source: 'https://www.navajeevanbam.com/home#donate',
   checkedOn: '2026-09-21',
   qr: {
-    src: 'images/reference/donation-qr.jpeg', width: 768, height: 996,
+    src: 'images/donation/donation-qr.jpeg', width: 768, height: 996,
     source: 'https://www.navajeevanbam.com/assets/images/QR-Code-for-donation-768x996.jpeg',
   },
   sponsorships: [

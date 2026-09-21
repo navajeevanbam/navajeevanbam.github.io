@@ -2,7 +2,9 @@
 title: "Ahalya Nivas"
 excerpt: "Shelter and everyday care for older women in need of support."
 category: "Our services"
-image: "reference-women"
+image: "cover.webp"
+imageAlt: "Women taking part in the Annalaxmi programme"
+imageSource: "https://www.navajeevanbam.com/assets/images/Annalaxmi-Program-ps8x2zm15c8ns19q1era9yjw0n795xz7ynvmq22gxk.jpeg"
 sample: false
 source: "https://www.navajeevanbam.com/home"
 ---

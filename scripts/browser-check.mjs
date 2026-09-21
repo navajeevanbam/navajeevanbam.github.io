@@ -186,7 +186,7 @@ try {
   for (const value of ['4794000100023666','PUNB0479400','293110100044278','UBIN0829315','84048316367','SBIN0RRUKGB']) assert.ok(bankDetails.includes(value), `Missing published bank detail: ${value}`);
   assert.equal(await page.locator('.donation-qr').evaluate(img => img.complete && img.naturalWidth === 768 && img.naturalHeight === 996), true);
   const qrLink = page.getByRole('link',{name:'Save donation QR'});
-  assert.equal(await qrLink.getAttribute('href'), `${base}/images/reference/donation-qr.jpeg`);
+  assert.equal(await qrLink.getAttribute('href'), `${base}/images/donation/donation-qr.jpeg`);
   assert.ok(await qrLink.getAttribute('download'));
   assert.equal(await page.locator('#donation-form').count(),0);
   result.interactions.push('Published sponsorship prices, all three bank accounts, and original downloadable QR image');

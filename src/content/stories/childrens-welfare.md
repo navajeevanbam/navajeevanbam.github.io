@@ -2,7 +2,9 @@
 title: "Children’s Welfare"
 excerpt: "A caring home, meals, education, and everyday support for children in need."
 category: "Our services"
-image: "reference-children"
+image: "cover.webp"
+imageAlt: "Children gathered at Navajeevan Seva Ashram"
+imageSource: "https://www.navajeevanbam.com/assets/images/Childrens-Welfare.jpeg"
 sample: false
 source: "https://www.navajeevanbam.com/home"
 ---
