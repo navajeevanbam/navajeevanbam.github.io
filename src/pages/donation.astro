@@ -1,48 +1,53 @@
 ---
 import { site } from '../config';
+import { donation } from '../config/donation';
 import Layout from '../layouts/Layout.astro';
-import PageIntro from '../components/PageIntro.astro';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
-import { programs } from '../config';
 import { url } from '../lib/site';
+const rupees = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 ---
-<Layout title="Make a contribution" description={`Explore how your kindness could support education, nourishing meals, elder companionship, and community wellbeing at ${site.name}.`} active="donation/">
-  <PageIntro eyebrow="A little generosity goes a long way" title="Be someone’s new beginning." description="A warm meal. A new book. An afternoon of companionship. Your willingness to care is where change begins."/>
-  <section class="container section-space"><div class="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16"><div><Photo name="food" eager class="aspect-[1.5] w-full rounded-3xl"/><h2 class="mt-8">Give with heart.<br/>Help hope grow.</h2><p class="mt-5 text-muted">We are building a community where care feels personal. Your support could help us create thoughtful opportunities for learning, nourishment, connection, and wellbeing.</p><div class="mt-7 flex items-start gap-3 rounded-xl bg-[#efeee4] p-5"><Icon name="heart" class="mt-1 shrink-0 text-[#9b7437]"/><p class="text-sm text-muted">This is a preview of our giving experience. Real donation methods and verified information about how funds are used will be added before contributions are accepted.</p></div></div>
-    <div class="content-card h-fit p-6 sm:p-9"><p class="eyebrow">Choose your kindness</p><h2 class="text-3xl">Every contribution matters.</h2><p class="mt-3 text-sm text-muted">Try the donation experience below.</p><form id="donation-form" class="mt-7" data-demo-form>
-      <fieldset><legend class="form-label mb-3">Choose an amount <span class="font-normal text-muted">(INR)</span></legend><div class="grid grid-cols-3 gap-3">{[500,1000,2500].map((amount,i) => <label class="amount-option cursor-pointer rounded-xl border border-forest/25 px-2 py-4 text-center text-sm font-semibold"><input type="radio" name="amount-choice" value={amount} checked={i === 1} class="sr-only"/>₹{amount.toLocaleString('en-IN')}</label>)}</div><label class="amount-option mt-3 flex cursor-pointer items-center gap-3 rounded-xl border border-forest/25 p-4 text-sm"><input type="radio" name="amount-choice" value="custom" class="accent-forest"/>Choose a custom amount</label></fieldset>
-      <div id="custom-amount-wrap" class="mt-5" hidden><label for="custom-amount" class="form-label">Your amount in rupees</label><input id="custom-amount" class="form-input" type="number" min="1" max="10000000" step="1" inputmode="numeric" placeholder="Enter a whole-rupee amount" disabled aria-describedby="amount-help"/><p id="amount-help" class="mt-2 text-xs text-muted">Enter ₹1 to ₹1,00,00,000 in whole rupees.</p></div>
-      <label for="donation-cause" class="form-label mt-6">Where would you like to help?</label><select id="donation-cause" name="cause" class="form-input"><option>Where it is needed most</option>{programs.map(program => <option>{program.category}</option>)}</select>
-      <div class="mt-7 flex items-center justify-between border-y border-forest/15 py-5"><span class="text-sm text-muted">Your selected contribution</span><output id="amount-preview" class="font-serif text-2xl" aria-live="polite">₹1,000</output></div>
-      <p class="demo-note mt-6">Demo only. No payment will be processed, and no payment details are collected.</p><button type="submit" class="button button-dark mt-5 w-full" disabled>Preview my contribution <Icon name="heart"/></button><p id="donation-result" class="form-result" role="status" hidden></p>
-      <noscript><p class="demo-note mt-4">Enable JavaScript to try this local donation demo.</p></noscript>
-    </form></div></div></section>
-  <section class="bg-[#efeee4] section-space"><div class="container"><p class="eyebrow">The care your kindness could make possible</p><h2>One gift. Many possibilities.</h2><div class="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{programs.map(program => <article class="rounded-2xl bg-cream p-6"><Icon name={program.icon} class="mb-5 size-7 text-[#936c29]"/><h3 class="text-xl">{program.category}</h3><p class="mt-3 text-sm text-muted">{program.description}</p></article>)}</div><p class="mt-6 text-xs text-muted">Program descriptions are illustrative. Specific allocation and outcome information will be published when confirmed.</p></div></section>
-  <section class="container section-space"><div class="mx-auto max-w-3xl"><p class="eyebrow">A few helpful answers</p><h2 class="mb-8">Giving, with clarity.</h2>{[{q:'Can I make a real donation here?',a:'Not yet. This page is an interactive demonstration. It does not connect to a payment provider, collect card or bank information, or transfer money.'},{q:'Will I receive a receipt or tax benefit?',a:'No receipt is issued by this demonstration. Registration, donation eligibility, and any applicable tax information must be verified and published before real donations are enabled.'},{q:'Can I contribute my time instead?',a:'Absolutely—volunteering is part of our vision. Use the Contact page to explore the example enquiry form. Confirmed opportunities and real contact details will be added later.'}].map(item => <details class="border-b border-forest/15 py-5"><summary class="cursor-pointer pr-5 text-sm font-semibold">{item.q}</summary><p class="mt-4 text-sm text-muted">{item.a}</p></details>)}<a class="text-link mt-7" href={url('contact/')}>Have another question? Get in touch <Icon name="arrow"/></a></div></section>
+<Layout title="Donate to a new beginning" description={`Support meals, education, care for older women, and Navajeevan Goshala. Find sponsorship options and donation details for ${site.name}.`} active="donation/" image="reference-meals">
+  <section class="container section-space donation-intro">
+    <div><p class="eyebrow">Give with love · {site.name}</p><h1>Your kindness.<br/>Someone’s new beginning.</h1><p class="intro-copy">A meal shared. A child learning. A place to call home. Your support helps sustain everyday care within and around our Ashram.</p><div class="mt-8 flex flex-wrap gap-3"><a class="button button-dark" href="#ways-to-give">Make a donation <Icon name="heart"/></a><a class="button button-outline" href="#sponsorships">Explore sponsorships <Icon name="arrow"/></a></div><p class="mt-6 text-xs text-muted">Mark a special occasion with an act of care.</p></div>
+    <figure><Photo name="reference-meals" eager class="w-full rounded-3xl aspect-[1.2]"/><figcaption class="mt-3 text-xs text-muted">Annadaan — a shared meal at Navajeevan Seva Ashram.</figcaption></figure>
+  </section>
+
+  <section id="sponsorships" class="section-space bg-[#efeee4]"><div class="container">
+    <div class="section-heading"><div><p class="eyebrow">Choose a way to care</p><h2>Sponsor a moment.<br/>Support everyday life.</h2></div><p class="max-w-sm text-sm text-muted">Support meals and programmes at the Ashram. Call us to arrange a date or discuss your contribution.</p></div>
+    <div class="sponsorship-grid">{donation.sponsorships.map(item => <article class="sponsorship-card"><div class="mb-6 flex size-12 items-center justify-center rounded-full bg-[#e8e8d7]"><Icon name={item.icon}/></div><h3>{item.title}</h3><p class="card-description">{item.description}</p><dl class="sponsorship-prices">{item.options.map(option => <div data-sponsor-amount={option.amount}><dt>{option.label}</dt><dd><strong>{rupees(option.amount)}</strong><span>{option.period}</span></dd></div>)}</dl></article>)}</div>
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-4"><p class="text-sm text-muted">Have a special day in mind? We’d love to help you plan it.</p><a class="text-link" href={site.phones[0].href}>Call {site.phones[0].label} <Icon name="phone"/></a></div>
+  </div></section>
+
+  <section id="ways-to-give" class="container section-space">
+    <div class="section-heading"><div><p class="eyebrow">Turn kindness into care</p><h2>Ways to make a donation</h2></div><p class="max-w-sm text-sm text-muted">Use the Ashram’s QR code or one of the bank accounts below. Payments are made through your payment or banking app.</p></div>
+    <div class="donation-qr-panel"><div><span class="card-category">01 / Scan & give</span><h3 class="mt-3 text-3xl">A simple way to help.</h3><p class="mt-5 max-w-md text-sm text-muted">Scan the donation QR code with a compatible payment app. If you are using this phone to browse, save the QR image and open it in an app that supports scanning from your photos.</p><a class="button button-dark mt-7" href={url(donation.qr.src)} download="Navajeevan-Seva-Ashram-donation-QR.jpeg">Save donation QR <Icon name="arrow"/></a></div><a class="qr-image-link" href={url(donation.qr.src)} aria-label="Open the donation QR image"><img src={url(donation.qr.src)} alt="Bharat QR donation code for Navajeevan Seva Ashram" width={donation.qr.width} height={donation.qr.height} loading="lazy" decoding="async" class="donation-qr"/></a></div>
+    <div class="mb-7 mt-14"><p class="card-category">02 / Bank transfer</p><h3 class="text-3xl">Bank details for donations</h3></div>
+    <div class="bank-grid">{donation.accounts.map(account => <article class="bank-card"><p class="card-category">{account.bank}</p><h4>{account.holder}</h4><dl><div><dt>Account number</dt><dd class="bank-number">{account.number}</dd></div><div><dt>IFSC code</dt><dd class="font-semibold tracking-wide">{account.ifsc}</dd></div><div><dt>Branch</dt><dd>{account.branch}</dd></div></dl></article>)}</div>
+  </section>
+
+  <section class="container pb-16"><div class="join-banner"><div><p class="eyebrow">We’re here to help</p><h2>Let’s make your gift personal.</h2><p class="max-w-xl">For meal sponsorship dates, contribution enquiries, or receipt information, contact Navajeevan Seva Ashram directly.</p><div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">{site.phones.map(phone => <a class="text-link text-saffron hover:text-white" href={phone.href}><Icon name="phone"/>{phone.label}</a>)}</div><a class="mt-4 block text-sm text-white underline underline-offset-4 [overflow-wrap:anywhere]" href={`mailto:${site.emails[0]}`}>{site.emails[0]}</a></div><div><a class="button button-saffron" href={url('contact/')}>Contact the Ashram <Icon name="arrow"/></a></div></div></section>
 </Layout>
-<script>
-  const form = document.querySelector<HTMLFormElement>('#donation-form')!;
-  const custom = document.querySelector<HTMLInputElement>('#custom-amount')!;
-  const customWrap = document.querySelector<HTMLElement>('#custom-amount-wrap')!;
-  const preview = document.querySelector<HTMLOutputElement>('#amount-preview')!;
-  const result = document.querySelector<HTMLElement>('#donation-result')!;
-  const currency = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
-  const selectedAmount = () => { const choice = form.querySelector<HTMLInputElement>('input[name="amount-choice"]:checked')!.value; return choice === 'custom' ? custom.valueAsNumber : Number(choice); };
-  function updateAmount() {
-    const isCustom = form.querySelector<HTMLInputElement>('input[name="amount-choice"]:checked')!.value === 'custom';
-    customWrap.hidden = !isCustom; custom.disabled = !isCustom; custom.required = isCustom;
-    const value = selectedAmount(); preview.textContent = Number.isFinite(value) && value >= 1 && value <= 10000000 && Number.isInteger(value) ? currency.format(value) : 'Enter amount';
-    result.hidden = true;
-  }
-  form.querySelector<HTMLButtonElement>('button[type="submit"]')!.disabled = false;
-  form.addEventListener('change', updateAmount);
-  custom.addEventListener('input', updateAmount);
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    if (!form.reportValidity()) return;
-    const cause = form.querySelector<HTMLSelectElement>('#donation-cause')!.value;
-    result.textContent = `Your example contribution: ${currency.format(selectedAmount())} · ${cause}. Thank you for your kindness. Demo only—no payment processed.`;
-    result.hidden = false;
-  });
-</script>
+<style>
+  .donation-intro { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+  .donation-intro h1 { font-size: clamp(2.7rem,4.5vw,4.4rem); }
+  .sponsorship-grid, .bank-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+  .sponsorship-card { display:flex; flex-direction:column; background:#faf8f1; padding:28px; border:1px solid #203e321a; border-radius:18px; }
+  .sponsorship-prices { margin-top:auto; padding-top:24px; }
+  .sponsorship-prices > div { border-top:1px solid #203e3220; padding-top:16px; margin-top:16px; }
+  .sponsorship-prices dt { font-size:12px; color:#5c685f; }
+  .sponsorship-prices dd { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px; margin-top:6px; }
+  .sponsorship-prices strong { font-family:var(--font-serif); font-size:28px; font-weight:400; }
+  .sponsorship-prices span { font-size:12px; color:#5c685f; }
+  .donation-qr-panel { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:48px; padding:40px; background:#eeeee3; border-radius:24px; }
+  .qr-image-link { display:block; width:100%; max-width:384px; justify-self:center; background:white; border-radius:12px; overflow:hidden; }
+  .donation-qr { display:block; width:100%; height:auto; object-fit:contain; }
+  .bank-card { padding:28px; border:1px solid #203e3226; border-radius:18px; background:#fffdf8; }
+  .bank-card h4 { font-size:24px; line-height:1.3; }
+  .bank-card dl { margin-top:24px; display:grid; gap:20px; }
+  .bank-card dt { font-size:11px; color:#5c685f; margin-bottom:5px; }
+  .bank-card dd { font-size:14px; overflow-wrap:anywhere; }
+  .bank-card .bank-number { font-size:18px; font-weight:600; font-variant-numeric:tabular-nums; user-select:all; }
+  @media(max-width:1023px) { .donation-intro { gap:32px; } .sponsorship-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .bank-grid { grid-template-columns:1fr; } }
+  @media(max-width:767px) { .donation-intro, .donation-qr-panel, .sponsorship-grid { grid-template-columns:1fr; } .donation-qr-panel { padding:24px; gap:32px; } }
+</style>

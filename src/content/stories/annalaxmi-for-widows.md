@@ -11,4 +11,4 @@ Annalaxmi supports older women, including widows, who lack dependable income and
 
 ## Nourishment with dignity
 
-The reference website credits the programme’s introduction to the founder president of Navajeevan Blind Relief Centre, Tirupati, and local charitable supporters. Contact the Ashram for current arrangements.
+The programme was introduced by the founder president of Navajeevan Blind Relief Centre, Tirupati, with local charitable supporters. Contact the Ashram for current arrangements.

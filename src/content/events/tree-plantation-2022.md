@@ -10,7 +10,7 @@ status: "past"
 location: "Brahmapur, Odisha"
 ---
 
-The Ashram’s reference website records a tree plantation programme on 5 June 2022, organised with DLSO advocates and judges from Brahmapur to mark World Environment Day.
+A tree plantation programme took place on 5 June 2022, organised with DLSO advocates and judges from Brahmapur to mark World Environment Day.
 
 The programme brought community members together around the care of trees and the local environment.
 

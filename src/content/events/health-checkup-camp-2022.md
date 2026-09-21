@@ -10,7 +10,7 @@ status: "past"
 location: "Brahmapur, Odisha"
 ---
 
-The Ashram’s reference website records a health checkup camp on 1 July 2022 by Friends Helping Club, BAM.
+A health checkup camp took place on 1 July 2022, organised by Friends Helping Club, BAM.
 
 Doctors from MKCG and other doctors in Brahmapur checked a range of health concerns during the camp.
 

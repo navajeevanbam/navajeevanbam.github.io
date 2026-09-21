@@ -11,4 +11,4 @@ Navajeevan Goshala cares for cows and calves, including stray cattle and animals
 
 ## Care for animals
 
-The reference website describes this work as following the guidelines of Bharatiya Gobansha Rakhyana Parisada. Contact the Ashram for current information about supporting the Goshala.
+This work follows the guidelines of Bharatiya Gobansha Rakhyana Parisada. Contact the Ashram for current information about supporting the Goshala.

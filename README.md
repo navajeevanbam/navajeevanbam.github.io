@@ -25,6 +25,7 @@ The production output is `dist/`. It consists only of HTML, CSS, JavaScript, fon
 ## Content and images
 
 - `src/config/site.ts`: NGO name, short name, city, address lines, phones, emails, community link, and logo asset. Shared by the header, footer, contact page, and page metadata.
+- `src/config/donation.ts`: published sponsorship amounts, bank accounts, QR provenance, and source-check date. The original donation QR image is retained without recompression.
 - `src/config/navigation.ts`: navigation links; adding an entry updates desktop and mobile menus.
 - `src/config/home.ts`: typed slider, About, featured project IDs, values, services, team profiles, and calls to action.
 - `src/config/reference-photos.ts`: original photo URLs, local paths, alt text, and actual dimensions.
@@ -41,7 +42,7 @@ Config files are typed TypeScript. Add phone/email entries to their arrays and a
 
 Available image keys: `community`, `education`, `food`, `elders`, `health`, and `volunteers`. All generated photos are fictional illustrations. Replace the appropriate WebP and update alt text when using real photography. Font files are bundled locally by the build.
 
-The NGO name, address, phone numbers, and emails remain as configured. The homepage, three historical 2022 projects, and five service summaries use content verified against https://www.navajeevanbam.com/home on 21 September 2026. Ten reference photographs are optimized locally under `public/images/reference/`; original URLs are recorded in configuration. Sample stories and events are explicitly labeled. Current service counts, schedules, and donation amounts have not been inferred from the historical reference. Do not add tax benefits, registrations, or financial claims without verification.
+The NGO name, address, phone numbers, and emails remain as configured. The homepage, three historical 2022 projects, and five service summaries use content verified against https://www.navajeevanbam.com/home on 21 September 2026. Ten reference photographs are optimized locally under `public/images/reference/`; original URLs are recorded in configuration. Sample stories and events are explicitly labeled. Current service counts and schedules have not been inferred from the historical reference. Donation amounts and bank details are transcribed from the main website’s donation section. Do not add tax benefits, registrations, or financial claims without verification.
 
 ## Homepage motion
 
@@ -49,9 +50,9 @@ Motion follows the reference website: sections rise 100px over 600ms with ease-i
 
 ## Interactive demos
 
-The homepage carousel crossfades over 650ms, preloads its photographs, rotates every five seconds, loops continuously through all slides, and disables autoplay for reduced motion. Hover, focus, arrows, and indicators preserve playback; Pause stops it and Play resumes it, including for reduced-motion users. Without JavaScript its first slide and donation link remain visible. Donation selections, custom whole-rupee amounts, event filters, and the mobile menu run in the browser. The donation form does not accept payment details or process payments. The contact form validates inputs and displays a demo notice; it sends no requests and stores no personal data. Form submit buttons are enabled only after their handlers are installed. Core content and navigation remain available without JavaScript.
+The homepage carousel crossfades over 650ms, preloads its photographs, rotates every five seconds, loops continuously through all slides, and disables autoplay for reduced motion. Hover, focus, arrows, and indicators preserve playback; Pause stops it and Play resumes it, including for reduced-motion users. Without JavaScript its first slide and donation link remain visible. The donation page lists seven sponsorship options, nine published amounts, the original QR image, and three bank accounts. Payment takes place in the visitor’s payment or banking app; there is no on-site payment form or payment-provider integration. Event filters and the mobile menu run in the browser. The contact form validates inputs and displays a demo notice; it sends no requests and stores no personal data. Form submit buttons are enabled only after their handlers are installed. Core content and navigation remain available without JavaScript.
 
-There are no external form services, analytics, embedded maps, or remote image dependencies. Adding real payments or message delivery is a separate integration.
+There are no external form services, analytics, embedded maps, or remote image dependencies. Adding on-site payment processing or message delivery is a separate integration.
 
 ## GitHub Pages
 

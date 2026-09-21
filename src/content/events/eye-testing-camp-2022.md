@@ -10,7 +10,7 @@ status: "past"
 location: "Brahmapur, Odisha"
 ---
 
-The Ashram’s reference website records an eye testing camp on 16 June 2022 with Brahmapur L V Prasad Eye Hospital.
+An eye testing camp took place on 16 June 2022 with Brahmapur L V Prasad Eye Hospital.
 
 The programme supported older women living around the Ashram with eye care and cataract treatment.
 

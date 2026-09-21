@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 
 const root = resolve('dist');
 const base = (process.env.BASE_PATH || '/').replace(/\/$/, '');
-const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff' };
+const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff' };
 const server = createServer(async (request, response) => {
   try {
     let pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
@@ -168,21 +168,15 @@ try {
   result.interactions.push('Event filters: all, upcoming, and past');
 
   await page.goto(href('donation/'));
-  await page.getByRole('button',{name:'Preview my contribution'}).click();
-  assert.match(await page.locator('#donation-result').innerText(),/₹1,000/);
-  await page.locator('label').filter({has:page.locator('input[value="500"]')}).click();
-  assert.equal(await page.locator('#amount-preview').innerText(),'₹500');
-  await page.getByLabel('Choose a custom amount').check();
-  await page.locator('#custom-amount').fill('-1');
-  await page.getByRole('button',{name:'Preview my contribution'}).click();
-  assert.equal(await page.locator('#custom-amount').evaluate(el => el.validity.valid),false);
-  assert.equal(await page.locator('#donation-result').isVisible(),false);
-  await page.locator('#custom-amount').fill('1750');
-  await page.getByLabel('Where would you like to help?').selectOption('Education');
-  await page.getByRole('button',{name:'Preview my contribution'}).click();
-  assert.match(await page.locator('#donation-result').innerText(),/₹1,750 · Education/);
-  assert.match(await page.locator('#donation-result').innerText(),/no payment processed/);
-  result.interactions.push('Donation presets, custom amount validation, cause, and demo feedback');
+  assert.deepEqual(await page.locator('[data-sponsor-amount]').evaluateAll(items => items.map(item => Number(item.dataset.sponsorAmount))), [2000,2500,4000,6000,12000,10000,12000,2000,500]);
+  const bankDetails = await page.locator('.bank-grid').innerText();
+  for (const value of ['4794000100023666','PUNB0479400','293110100044278','UBIN0829315','84048316367','SBIN0RRUKGB']) assert.ok(bankDetails.includes(value), `Missing published bank detail: ${value}`);
+  assert.equal(await page.locator('.donation-qr').evaluate(img => img.complete && img.naturalWidth === 768 && img.naturalHeight === 996), true);
+  const qrLink = page.getByRole('link',{name:'Save donation QR'});
+  assert.equal(await qrLink.getAttribute('href'), `${base}/images/reference/donation-qr.jpeg`);
+  assert.ok(await qrLink.getAttribute('download'));
+  assert.equal(await page.locator('#donation-form').count(),0);
+  result.interactions.push('Published sponsorship prices, all three bank accounts, and original downloadable QR image');
 
   await page.goto(href('contact/'));
   const sent = [];
