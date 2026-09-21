@@ -1,0 +1,26 @@
+---
+title: "Ganesh Puja"
+date: "2026-09-14"
+description: "Moments from Ganesh Puja at Navajeevan Seva Ashram, with prayers and a community gathering."
+sample: false
+cover: "d.webp"
+images:
+  - filename: "a.webp"
+    alt: "Participants gathered around the ritual fire in front of the decorated Ganesh shrine"
+  - filename: "b.webp"
+    alt: "An offering being made before the Ganesh idol beneath colourful drapes"
+  - filename: "c.webp"
+    alt: "Participants seated beside the ritual fire and Ganesh shrine"
+  - filename: "d.webp"
+    alt: "Ganesh Puja ceremony with a ritual fire and flower-decorated idol"
+  - filename: "e.webp"
+    alt: "Children seated together on mats during the Ganesh Puja gathering"
+  - filename: "f.webp"
+    alt: "Participants making offerings around the ritual fire"
+  - filename: "g.webp"
+    alt: "Puja participants beside the ritual fire with the Ganesh idol behind them"
+  - filename: "h.webp"
+    alt: "A wide view of children and adults gathered in the decorated hall"
+  - filename: "i.webp"
+    alt: "Children seated in the foreground with adults at the back of the hall"
+---
