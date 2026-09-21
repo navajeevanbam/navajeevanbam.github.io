@@ -9,5 +9,5 @@ const { data } = event;
 ---
 <article class="content-card event-card" data-status={data.status}>
   <a href={url(`events/${event.id}/`)} class="card-photo" tabindex="-1" aria-hidden="true"><Photo name={data.image}/><span class:list={['photo-badge', { 'past-badge': data.status === 'past' }]}>{data.status === 'upcoming' ? 'Upcoming' : 'Past gathering'}</span></a>
-  <div class="card-body"><p class="card-category">{data.category}</p><h3><a href={url(`events/${event.id}/`)}>{data.title}</a></h3><p class="card-description">{data.excerpt}</p><div class="card-meta"><span><Icon name="calendar"/>{dateLabel(data.date)}</span><span><Icon name="pin"/>{data.location}</span></div><a href={url(`events/${event.id}/`)} class="text-link">Explore event <Icon name="arrow"/></a></div>
+  <div class="card-body"><p class="card-category">{data.category}{data.sample && " · Sample event"}</p><h3><a href={url(`events/${event.id}/`)}>{data.title}</a></h3><p class="card-description">{data.excerpt}</p><div class="card-meta"><span><Icon name="calendar"/>{dateLabel(data.date)}</span><span><Icon name="pin"/>{data.location}</span></div><a href={url(`events/${event.id}/`)} class="text-link">Explore event <Icon name="arrow"/></a></div>
 </article>

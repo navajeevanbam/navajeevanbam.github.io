@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "Planting tomorrow’s garden"
 excerpt: "A shared morning of soil, saplings, and making our community spaces a little greener."
 date: "2026-08-09"

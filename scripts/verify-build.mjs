@@ -11,11 +11,13 @@ async function walk(dir) {
 const files = await walk(root);
 const pages = files.filter(file => extname(file) === '.html');
 const contentCount = (await walk(resolve('src/content'))).filter(file => extname(file) === '.md').length;
-assert.equal(pages.length, 7 + contentCount, 'Expected six primary pages, all content detail pages, and a 404 page');
+assert.equal(pages.length, 7 + contentCount, 'Expected five primary pages, the About redirect, all content detail pages, and a 404 page');
+assert.ok(!files.some(file => /\/blogs\//i.test(file)), 'Obsolete routes must not be generated');
 const titles = new Set();
 let checked = 0;
 for (const file of pages) {
   const html = await readFile(file, 'utf8');
+  assert.ok(!/\bblogs?\b/i.test(html), `Obsolete wording: ${file}`);
   const title = html.match(/<title>(.*?)<\/title>/)?.[1];
   assert.ok(title, `Missing title: ${file}`);
   assert.ok(!titles.has(title), `Duplicate title: ${title}`);
@@ -25,11 +27,16 @@ for (const file of pages) {
   for (const [, attribute] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (!attribute.startsWith('/') || attribute.startsWith('//')) continue;
     const [pathname] = attribute.split(/[?#]/);
+    const fragment = attribute.split('#')[1];
     assert.ok(!base || pathname.startsWith(base + '/'), `Missing base: ${attribute} in ${file}`);
     const relative = decodeURIComponent(pathname.slice(base.length)).replace(/^\//, '');
     let target = resolve(root, relative);
     if (pathname.endsWith('/')) target = join(target, 'index.html');
     assert.ok((await stat(target).catch(() => null))?.isFile(), `Broken local reference: ${attribute} in ${file}`);
+    if (fragment && extname(target) === '.html') {
+      const targetHtml = await readFile(target, 'utf8');
+      assert.ok(targetHtml.includes(`id="${fragment}"`), `Missing section: ${attribute}`);
+    }
     checked++;
   }
   for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {

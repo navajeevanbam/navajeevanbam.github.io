@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "A day of community"
 excerpt: "Celebrating the everyday kindness that makes a neighbourhood feel like a home."
 date: "2026-07-19"

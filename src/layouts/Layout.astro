@@ -3,8 +3,8 @@ import '../styles/global.css';
 import { site, photos, navigation } from '../config';
 import { url } from '../lib/site';
 import Icon from '../components/Icon.astro';
-interface Props { title: string; description: string; active?: string; image?: string; }
-const { title, description, active = '', image = 'community' } = Astro.props;
+interface Props { title: string; description: string; active?: string; image?: string; scrollReveal?: boolean; }
+const { title, description, active = '', image = 'community', scrollReveal = false } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).href : undefined;
 ---
@@ -25,6 +25,15 @@ const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).hre
     {canonical && <meta property="og:url" content={canonical}/>}
     {socialImage && <meta property="og:image" content={socialImage}/>}
     <meta name="twitter:card" content="summary_large_image"/>
+    {scrollReveal && <script is:inline>
+      // Set the initial hidden state before the body can paint.
+      if ('IntersectionObserver' in window && 'animate' in Element.prototype && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const root = document.documentElement;
+        root.classList.add('reveal-ready');
+        // Leave the page readable if the application script fails to load.
+        root.dataset.revealFallback = String(setTimeout(() => root.classList.remove('reveal-ready'), 4000));
+      }
+    </script>}
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 focus:rounded-lg focus:bg-white focus:p-4">Skip to content</a>
@@ -42,7 +51,7 @@ const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).hre
           <img src={url(site.logo.src)} alt={`${site.name} — ${site.city}`} width={site.logo.width} height={site.logo.height} class="h-auto w-36 object-contain sm:w-48"/>
         </a>
         <nav id="main-navigation" class="desktop-nav items-center gap-7 lg:flex" aria-label="Main navigation">
-          {navigation.map(([label, path]) => <a href={url(path)} aria-current={active === path ? 'page' : undefined} class="relative text-xs font-medium text-muted">{label}</a>)}
+          {navigation.map(([label, path]) => <a href={url(path)} data-nav-path={path} aria-current={active === path ? 'page' : undefined} class="relative text-xs font-medium text-muted">{label}</a>)}
         </nav>
         <div class="flex items-center gap-3"><a class="button button-dark min-h-10 px-4 sm:px-5 text-xs" href={url('donation/')} aria-current={active === 'donation/' ? 'page' : undefined}><span class="hidden sm:inline">Make a</span> donation <Icon name="heart" class="size-4"/></a><button id="menu-toggle" class="flex size-11 items-center justify-center rounded-full border border-forest/20 lg:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
       </div>
@@ -51,8 +60,8 @@ const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).hre
     <footer class="bg-forest text-white">
       <div class="container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.2fr_.8fr_.9fr_1.5fr]">
         <div><a href={url()} class="font-serif text-2xl text-white hover:text-saffron">{site.name}<span class="block mt-2 font-sans text-[9px] uppercase tracking-[.25em] text-saffron">Rooted in care. Growing together.</span></a><p class="mt-5 max-w-xs text-sm text-white/70">A shared home for kindness, dignity, and the belief that every life deserves a new beginning.</p><div class="mt-5 flex items-center gap-2 text-xs text-saffron"><Icon name="heart" class="size-4"/> Made with care, for our community.</div></div>
-        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Explore the Ashram</h2><a class="footer-link" href={url('about/')}>Our story</a><a class="footer-link" href={url('events/')}>Events & gatherings</a><a class="footer-link" href={url('stories/')}>Stories from the Ashram</a><a class="footer-link" href={url('contact/')}>Get in touch</a></div>
-        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Be part of the change</h2><a class="footer-link" href={url('donation/')}>Make a donation</a><a class="footer-link" href={url('contact/')}>Volunteer with us</a><a class="footer-link" href={url('about/#programs')}>Our initiatives</a></div>
+        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Explore the Ashram</h2><a class="footer-link" href={url('#about')}>Our story</a><a class="footer-link" href={url('events/')}>Events & gatherings</a><a class="footer-link" href={url('stories/')}>Stories from the Ashram</a><a class="footer-link" href={url('contact/')}>Get in touch</a></div>
+        <div><h2 class="font-sans text-sm font-semibold tracking-normal">Be part of the change</h2><a class="footer-link" href={url('donation/')}>Make a donation</a><a class="footer-link" href={url('contact/')}>Volunteer with us</a><a class="footer-link" href={url('#services')}>Our initiatives</a></div>
         <div class="min-w-0">
           <h2 class="font-sans text-sm font-semibold tracking-normal">Our door is always open</h2>
           <address class="mt-5 space-y-5 text-sm not-italic">
@@ -72,11 +81,51 @@ const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).hre
           <a class="text-link mt-6 text-saffron hover:text-white" href={url('contact/')}>Let’s start a conversation <Icon name="arrow"/></a>
         </div>
       </div>
-      <div class="border-t border-white/15"><div class="container flex flex-col justify-between gap-3 py-5 text-[10px] leading-relaxed text-white/65 md:flex-row"><p>© {new Date().getFullYear()} {site.name}. {site.tagline}</p><p class="max-w-lg md:text-right">Illustrative website: sample stories, events, and impact figures. All photographs are AI-generated. No payments or messages are sent.</p></div></div>
+      <div class="border-t border-white/15"><div class="container flex flex-col justify-between gap-3 py-5 text-[10px] leading-relaxed text-white/65 md:flex-row"><p>© {new Date().getFullYear()} {site.name}. {site.tagline}</p><p class="max-w-lg md:text-right">Reference photographs show the Ashram community. Sample stories and events are labeled and use illustrative AI-generated images. No payments or messages are sent.</p></div></div>
     </footer>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('#menu-toggle');
       const navigation = document.querySelector<HTMLElement>('#main-navigation');
+      const navLinks = [...(navigation?.querySelectorAll<HTMLAnchorElement>('[data-nav-path]') ?? [])];
+      const homeLink = navLinks.find(link => link.dataset.navPath === '');
+      const isHomePage = homeLink && new URL(homeLink.href).pathname === location.pathname;
+      function markNavigation(selected: HTMLAnchorElement) {
+        for (const link of navLinks) {
+          if (link === selected) link.setAttribute('aria-current', selected === homeLink ? 'page' : 'location');
+          else link.removeAttribute('aria-current');
+        }
+      }
+      function updateSectionMarker() {
+        if (!isHomePage || !homeLink) return;
+        markNavigation(navLinks.find(link => link.dataset.navPath === location.hash) ?? homeLink);
+      }
+      if (isHomePage && homeLink) {
+        const sections = navLinks.flatMap(link => {
+          const path = link.dataset.navPath;
+          const section = path?.startsWith('#') ? document.getElementById(path.slice(1)) : null;
+          return section ? [{ link, section }] : [];
+        });
+        let scrollFrame = 0;
+        function updateScrollMarker() {
+          scrollFrame = 0;
+          const headerBottom = document.querySelector('header')?.getBoundingClientRect().bottom ?? 0;
+          const readingLine = Math.max(headerBottom + 24, innerHeight * 0.3);
+          let selected = homeLink!;
+          // Keep the last reached section selected between named sections.
+          for (const { link, section } of sections) {
+            if (section.getBoundingClientRect().top <= readingLine) selected = link;
+          }
+          markNavigation(selected);
+        }
+        function scheduleScrollMarker() {
+          if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScrollMarker);
+        }
+        window.addEventListener('scroll', scheduleScrollMarker, { passive: true });
+        window.addEventListener('resize', scheduleScrollMarker);
+        window.addEventListener('pageshow', scheduleScrollMarker);
+      }
+      updateSectionMarker();
+      window.addEventListener('hashchange', updateSectionMarker);
       function setMenu(open: boolean) {
         toggle?.setAttribute('aria-expanded', String(open));
         toggle?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
@@ -89,6 +138,7 @@ const socialImage = Astro.site ? new URL(url(photos[image].src), Astro.site).hre
       document.addEventListener('click', (event) => {
         if (event.target instanceof Node && !navigation?.contains(event.target) && !toggle?.contains(event.target)) setMenu(false);
       });
+      navigation?.addEventListener('click', (event) => { if (event.target instanceof Element && event.target.closest('a')) setMenu(false); });
       matchMedia('(min-width: 1024px)').addEventListener('change', () => setMenu(false));
     </script>
     <noscript><style>@media(max-width:1023px){.desktop-nav{display:flex;position:static;flex-wrap:wrap;width:100%;gap:20px;padding-bottom:20px}header>.container{flex-wrap:wrap;padding-top:15px}.desktop-nav{order:3}#menu-toggle{display:none}}</style></noscript>

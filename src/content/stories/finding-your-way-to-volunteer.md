@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "There is more than one way to give"
 excerpt: "Your skills, your time, and your everyday interests can all be a starting point."
 date: "2026-07-18"

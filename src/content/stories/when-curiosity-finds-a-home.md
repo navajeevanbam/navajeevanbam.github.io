@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "When curiosity finds a place to grow"
 excerpt: "Books, patient guidance, and a little encouragement can make learning feel like possibility."
 date: "2026-08-29"

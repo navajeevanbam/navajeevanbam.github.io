@@ -1,18 +1,6 @@
 ---
-import { site } from '../config';
-import Layout from '../layouts/Layout.astro';
-import PageIntro from '../components/PageIntro.astro';
-import Photo from '../components/Photo.astro';
-import Icon from '../components/Icon.astro';
-import JoinBanner from '../components/JoinBanner.astro';
-import { programs } from '../config';
-
+import { url } from '../lib/site';
+const destination = url('#about');
 ---
-<Layout title="Our story" description={`Discover the spirit of ${site.name}: a community built around dignity, belonging, and everyday acts of care.`} active="about/">
-  <PageIntro eyebrow="The heart behind the care" title="A home for hope. A community for life." description="We believe that care is more than something we give. It is something we build together, one relationship at a time."/>
-  <section class="container section-space"><div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"><Photo name="community" eager class="aspect-[1.2] w-full rounded-3xl"/><div><p class="eyebrow">Our story</p><h2>It begins with<br/>being there.</h2><p class="mt-6 text-muted">Imagine a place where an older neighbour always has someone to talk to, a child has a quiet corner to learn, and a warm meal comes with a warm welcome.</p><p class="mt-4 text-muted">That is the spirit behind {site.name}. Our vision brings education, nourishment, elder companionship, and health awareness into one caring community.</p><p class="mt-4 text-muted">This is a first look at the Ashram we hope to share with you. The stories and programs on this website are illustrative; details of our real journey will take their place.</p></div></div></section>
-  <section class="bg-[#efeee4]"><div class="container grid gap-10 py-14 md:grid-cols-2 md:gap-16"><div><p class="eyebrow">Our mission</p><h2 class="text-3xl">Make everyday care<br/>accessible to everyone.</h2><p class="mt-5 text-sm text-muted">To create welcoming spaces and thoughtful support that help people learn, stay nourished, feel connected, and live with dignity.</p></div><div><p class="eyebrow">Our vision</p><h2 class="text-3xl">A community where<br/>no one feels left behind.</h2><p class="mt-5 text-sm text-muted">A future in which neighbours care for neighbours, opportunities are shared, and every person has a place to belong.</p></div></div></section>
-  <section class="container section-space"><div class="section-heading"><div><p class="eyebrow">What guides us</p><h2>Kindness, with intention.</h2></div></div><div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{[{title:'Dignity, always',text:'We see people first. Every conversation and every act of support begins with respect.',icon:'heart'},{title:'Care through listening',text:'We take time to understand what matters to a person before offering a helping hand.',icon:'sun'},{title:'Together is better',text:'We value the knowledge, time, and experience that every neighbour brings.',icon:'bowl'},{title:'Honest beginnings',text:'We share our work thoughtfully and distinguish our hopes from the progress we can demonstrate.',icon:'check'}].map(value => <article><Icon name={value.icon} class="mb-5 size-7 text-[#9b7437]"/><h3 class="text-xl">{value.title}</h3><p class="mt-3 text-sm text-muted">{value.text}</p></article>)}</div></section>
-  <section id="programs" class="container pb-10"><div class="section-heading"><div><p class="eyebrow">Four ways to nurture hope</p><h2>Care for every chapter of life.</h2></div></div><div class="grid gap-7 md:grid-cols-2">{programs.map(program => <article id={program.image} class="content-card"><Photo name={program.image} class="aspect-[1.8] w-full"/><div class="p-7"><p class="card-category">{program.category}</p><h3>{program.title}</h3><p class="mt-4 text-sm text-muted">{program.description} Our example program pairs thoughtful activities with the time and attention that make care personal. Program dates and availability will be published as they are confirmed.</p></div></article>)}</div></section>
-  <JoinBanner/>
-</Layout>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Learn about Navajeevan Seva Ashram on our homepage."/><meta http-equiv="refresh" content={`0;url=${destination}`}/><title>About Us — Continue to our homepage</title></head><body><main><h1>Our story has a new home.</h1><p><a href={destination}>Read about Navajeevan Seva Ashram</a></p></main></body></html>

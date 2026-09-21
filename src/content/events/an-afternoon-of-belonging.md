@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "An afternoon of belonging"
 excerpt: "Slow down, share a cup of tea, and make time for the stories of our elders."
 date: "2026-10-25"

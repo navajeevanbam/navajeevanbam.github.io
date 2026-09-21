@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "A table for everyone"
 excerpt: "Help prepare and share a comforting community lunch. Good food tastes even better together."
 date: "2026-10-11"

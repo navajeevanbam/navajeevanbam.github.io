@@ -1,8 +1,8 @@
-// Add entries to show them in both desktop and mobile navigation.
 export const navigation: [label: string, path: string][] = [
   ['Home', ''],
-  ['About us', 'about/'],
-  ['Our events', 'events/'],
+  ['About Us', '#about'],
+  ['Our Team', '#team'],
+  ['Events', 'events/'],
   ['Stories', 'stories/'],
   ['Contact', 'contact/'],
 ];

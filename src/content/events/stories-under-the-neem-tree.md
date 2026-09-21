@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "Stories under the neem tree"
 excerpt: "An afternoon of books, imagination, and shared discovery with young learners."
 date: "2026-10-18"

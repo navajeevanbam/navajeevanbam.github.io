@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "A morning for wellbeing"
 excerpt: "An example health-awareness gathering bringing questions, listening, and local support together."
 date: "2026-08-23"

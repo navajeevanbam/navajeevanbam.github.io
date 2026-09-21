@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "More than a meal: the joy of a shared table"
 excerpt: "A simple plate of food can make room for connection, comfort, and belonging."
 date: "2026-09-05"

@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "The quiet kindness of simply showing up"
 excerpt: "Sometimes, the most meaningful thing we can offer is our undivided attention."
 date: "2026-09-12"

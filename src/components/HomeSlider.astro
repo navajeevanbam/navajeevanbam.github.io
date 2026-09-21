@@ -1,0 +1,69 @@
+---
+import { home } from '../config/home';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+import { url } from '../lib/site';
+---
+<section class="home-slider" aria-label="Life at the Ashram" aria-roledescription="carousel">
+  <h1 class="sr-only">Navajeevan Seva Ashram — a little care, a new beginning</h1>
+  <div id="home-slides" aria-live="off">
+    {home.slides.map((slide, index) => <div class="home-slide" data-slide data-active={index === 0 ? "true" : "false"} aria-hidden={index !== 0 ? "true" : "false"} inert={index !== 0} hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${home.slides.length}`}>
+      <Photo name={slide.image} eager={index === 0} class="slide-photo"/>
+      <div class="slide-shade"></div>
+      <div class="container slide-content"><p class="eyebrow">{slide.eyebrow}</p><h2>{slide.title}</h2><p class="slide-description">{slide.description}</p><a class="button button-saffron" href={url('donation/')}>{slide.cta}<Icon name="arrow"/></a></div>
+    </div>)}
+  </div>
+  <div class="container slider-controls" hidden>
+    <div class="slider-dots" role="group" aria-label="Choose a slide">{home.slides.map((_, i) => <button type="button" data-slide-to={i} aria-label={`Show slide ${i + 1}`} aria-pressed={i === 0}><span></span></button>)}</div>
+    <div class="flex items-center gap-2"><button type="button" data-prev aria-label="Previous slide">←</button><button type="button" data-next aria-label="Next slide">→</button><button type="button" data-pause class="slider-pause" aria-label="Pause slideshow">Pause</button></div>
+  </div>
+</section>
+<script>
+  const slider = document.querySelector<HTMLElement>('.home-slider');
+  if (slider) {
+    const slides = [...slider.querySelectorAll<HTMLElement>('[data-slide]')];
+    const dots = [...slider.querySelectorAll<HTMLButtonElement>('[data-slide-to]')];
+    const pause = slider.querySelector<HTMLButtonElement>('[data-pause]')!;
+    const region = slider.querySelector<HTMLElement>('#home-slides')!;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    // Stack slides so opacity can blend them without changing the hero height.
+    // Load the remaining photos now, before the first five-second rotation.
+    slides.forEach(slide => {
+      slide.hidden = false;
+      const photo = slide.querySelector('img');
+      if (photo) { photo.loading = 'eager'; void photo.decode().catch(() => {}); }
+    });
+    let current = 0, paused = reduced.matches;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    function sync() {
+      clearInterval(timer);
+      const rotating = !paused && !document.hidden;
+      region.setAttribute('aria-live', rotating ? 'off' : 'polite');
+      pause.textContent = paused ? 'Play' : 'Pause';
+      pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+      if (rotating) timer = setInterval(() => show(current + 1), 5000);
+    }
+    function show(index: number) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.dataset.active = String(active);
+        slide.setAttribute('aria-hidden', String(!active));
+        slide.inert = !active;
+        dots[i].setAttribute('aria-pressed', String(active));
+      });
+    }
+    function manual(index: number) { show(index); sync(); }
+    dots.forEach((dot, i) => dot.addEventListener('click', () => manual(i)));
+    slider.querySelector('[data-prev]')?.addEventListener('click', () => manual(current - 1));
+    slider.querySelector('[data-next]')?.addEventListener('click', () => manual(current + 1));
+    pause.addEventListener('click', () => {
+      paused = !paused;
+      sync();
+    });
+    reduced.addEventListener('change', () => { if (reduced.matches) { paused = true; } sync(); });
+    document.addEventListener('visibilitychange', sync);
+    slider.querySelector<HTMLElement>('.slider-controls')!.hidden = false;
+    sync();
+  }
+</script>

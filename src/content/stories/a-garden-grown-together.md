@@ -1,4 +1,5 @@
 ---
+sample: true
 title: "A small garden, grown together"
 excerpt: "What planting a few seeds can teach us about patience and shared responsibility."
 date: "2026-08-15"
