@@ -5,7 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import EventCard from '../../components/EventCard.astro';
 import JoinBanner from '../../components/JoinBanner.astro';
-const events = (await getCollection('events')).sort((a,b) => a.data.status !== b.data.status ? (a.data.status === 'upcoming' ? -1 : 1) : a.data.status === 'upcoming' ? +a.data.date - +b.data.date : +b.data.date - +a.data.date);
+const events = (await getCollection('events')).sort((a,b) => +b.data.date - +a.data.date || a.data.title.localeCompare(b.data.title, 'en'));
 ---
 <Layout title="Events & gatherings" description={`Explore community gatherings at ${site.name}, from shared meals and reading afternoons to garden days and elder companionship.`} active="events/">
   <PageIntro eyebrow="Come together. Give together." title="Make a little time for togetherness." description="A shared meal, a story, a morning in the garden. Discover the moments that could bring our community closer."/>

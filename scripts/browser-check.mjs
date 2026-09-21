@@ -164,12 +164,13 @@ try {
   await page.clock.resume();
   result.interactions.push('Carousel timing, controls, keyboard, continuous looping, explicit pause, and reduced motion');
   await page.goto(href('events/'));
+  assert.deepEqual(await page.locator('.event-card h3').allTextContents(), ['A table for everyone', 'Health Checkup Camp', 'Eye Testing Camp', 'Tree Plantation']);
   await page.getByRole('button', {name:'Upcoming',exact:true}).click();
-  assert.equal(await page.locator('.event-card:visible').count(),3);
+  assert.equal(await page.locator('.event-card:visible').count(),1);
   await page.getByRole('button', {name:'Past gatherings',exact:true}).click();
-  assert.equal(await page.locator('.event-card:visible').count(),6);
+  assert.equal(await page.locator('.event-card:visible').count(),3);
   await page.getByRole('button', {name:'All gatherings',exact:true}).click();
-  assert.equal(await page.locator('.event-card:visible').count(),9);
+  assert.equal(await page.locator('.event-card:visible').count(),4);
   result.interactions.push('Event filters: all, upcoming, and past');
 
   await page.goto(href('donation/'));
@@ -224,7 +225,7 @@ try {
   const nav = page.locator('#main-navigation');
   await page.waitForFunction(() => document.querySelector('[data-nav-path="#about"]')?.getAttribute('aria-current') === 'location');
   assert.equal(await nav.getByRole('link', {name:'Home',exact:true,includeHidden:true}).getAttribute('aria-current'), null);
-  assert.deepEqual(await nav.getByRole('link', {includeHidden:true}).allTextContents(), ['Home','About Us','Our Team','Events','Stories','Contact']);
+  assert.deepEqual(await nav.getByRole('link', {includeHidden:true}).allTextContents(), ['Home','About Us','Our Services','Our Team','Events','Stories','Contact']);
   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false');
   await page.goto(href('about/'));
   await page.waitForURL(href('#about'));
@@ -245,7 +246,7 @@ try {
   const scrollUrl = page.url();
   for (const width of [375, 1440]) {
     await page.setViewportSize({width, height:900});
-    for (const id of ['about', 'team', 'about']) {
+    for (const id of ['about', 'services', 'team', 'services', 'about']) {
       await page.locator(`#${id}`).evaluate(el => el.scrollIntoView({behavior:'instant', block:'start'}));
       await page.waitForFunction(id => document.querySelector(`[data-nav-path="#${id}"]`)?.getAttribute('aria-current') === 'location', id);
       assert.equal(await nav.locator('[aria-current]').count(),1);
