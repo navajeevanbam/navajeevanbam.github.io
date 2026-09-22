@@ -25,6 +25,11 @@ export async function checkContact(page, href, output) {
   await phone.fill('+91 98765-43210');
   await email.fill('invalid');await submit.click();
   assert.equal(await email.evaluate(el=>el.validity.valid),false);
+  for (const value of ['visitor@example.org', 'visitor@gmail.com.evil.org', 'visitor@sub.gmail.com']) {
+    await email.fill(value); await submit.click();
+    assert.equal(await email.evaluate(el=>el.validity.valid),false);
+    assert.equal(requests.length,0);
+  }
   await email.fill('');
   assert.equal(await page.locator('#contact-form').getAttribute('data-endpoint'),contact.endpointUrl);
   await page.locator('#contact-form').evaluate(el=>el.dataset.endpoint='');
@@ -87,11 +92,11 @@ export async function checkContact(page, href, output) {
   assert.equal(await page.evaluate(()=>localStorage.length+sessionStorage.length),0);
   await name.fill('Another Visitor');
   await phone.fill('919876543210');
-  await email.fill('visitor@example.org');
+  await email.fill('visitor@gmail.com');
   await page.getByLabel('What brings you here?').selectOption('Planning a visit');
   await message.fill(text);mode='success';
   await submit.click();await page.locator('#contact-success').waitFor({state:'visible'});
-  assert.equal(new URLSearchParams(requests.at(-1).postData()).get(contact.fieldIds.email),'visitor@example.org');
+  assert.equal(new URLSearchParams(requests.at(-1).postData()).get(contact.fieldIds.email),'visitor@gmail.com');
   await page.unroute(endpoint);page.off('request',listener);
   await page.emulateMedia({reducedMotion:'no-preference'});
 }

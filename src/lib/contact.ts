@@ -1,3 +1,9 @@
+export function isAllowedContactEmail(value: string, allowedDomains: readonly string[]): boolean {
+  const email = value.trim();
+  if (!email) return true;
+  const parts = email.split('@');
+  return parts.length === 2 && !!parts[0] && !/\s/.test(email) && allowedDomains.includes(parts[1].toLowerCase());
+}
 export function normalizeIndianMobile(value: string): string | null {
   const compact = value.replace(/[\s-]/g, '');
   const match = compact.match(/^(?:\+91|91)?([6-9]\d{9})$/);

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { contact } from '../src/config/contact.ts';
-import { normalizeIndianMobile, isContactEndpointConfigured, isContactFieldIdsConfigured, sendContact } from '../src/lib/contact.ts';
+import { isAllowedContactEmail, normalizeIndianMobile, isContactEndpointConfigured, isContactFieldIdsConfigured, sendContact } from '../src/lib/contact.ts';
 for(const value of ['9876543210','+919876543210','919876543210','+91 98765-43210','98765 43210'])assert.equal(normalizeIndianMobile(value),'+919876543210');
 for(const value of ['6123456789','7123456789','8123456789','9123456789'])assert.equal(normalizeIndianMobile(value),`+91${value}`);
 for(const value of ['','1234567890','987654321','+449876543210','09876543210','98765abc10','++919876543210'])assert.equal(normalizeIndianMobile(value),null);
@@ -24,3 +24,11 @@ try {
   await sendContact(contact.endpointUrl, contact.fieldIds, {name:'Visitor',phone:'+919876543210',email:'',subject:'Volunteering',message:'Hello'},1000);
 } finally { globalThis.fetch = originalFetch; }
 console.log('Contact phone normalization and endpoint configuration checks passed.');
+
+for (const domain of contact.allowedEmailDomains) {
+  assert.equal(isAllowedContactEmail(`visitor+test@${domain.toUpperCase()}`, contact.allowedEmailDomains), true);
+}
+assert.equal(isAllowedContactEmail('', contact.allowedEmailDomains), true);
+for (const value of ['visitor@example.org', 'visitor@gmail.com.evil.org', 'visitor@sub.gmail.com', 'visitor@@gmail.com', '@gmail.com', 'hello world@gmail.com']) {
+  assert.equal(isAllowedContactEmail(value, contact.allowedEmailDomains), false);
+}

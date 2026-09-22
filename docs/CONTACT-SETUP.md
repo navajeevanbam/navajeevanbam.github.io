@@ -17,3 +17,5 @@ Requests are URL-encoded HTTPS POSTs using `no-cors` and no credentials. Google 
 Mobile numbers are normalized to +91 followed by ten digits. Values are not stored in browser storage. Without JavaScript, visitors can open the configured Google Form directly or call/email.
 
 Automated checks mock requests and verify field mappings, validation, network failure, timeout, and completion behavior without creating live responses. To verify storage, submit a clearly marked enquiry with your own details and check the Google Form Responses tab (or linked spreadsheet), both with and without email. Repeat after publishing or changing the Google Form.
+
+The optional website email field accepts only the exact domains in `allowedEmailDomains`: Gmail, Outlook/Hotmail, Yahoo, iCloud, and AOL. Domain matching ignores case and rejects subdomains. Edit this list and `emailProviderHint` in the contact config to change the policy. This is website validation; direct Google Form submissions are controlled by the Google Form settings.

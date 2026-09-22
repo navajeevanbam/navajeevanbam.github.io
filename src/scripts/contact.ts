@@ -1,4 +1,5 @@
-import { normalizeIndianMobile, isContactEndpointConfigured, isContactFieldIdsConfigured, sendContact } from '../lib/contact';
+import { contact } from '../config/contact';
+import { isAllowedContactEmail, normalizeIndianMobile, isContactEndpointConfigured, isContactFieldIdsConfigured, sendContact } from '../lib/contact';
 const form = document.querySelector<HTMLFormElement>('#contact-form')!;
 const panel = document.querySelector<HTMLElement>('#contact-entry')!;
 const success = document.querySelector<HTMLElement>('#contact-success')!;
@@ -15,7 +16,7 @@ const fields = form.querySelector<HTMLFieldSetElement>('fieldset')!;
 let sending = false;
 button.disabled = false;
 form.addEventListener('input', () => {
-  name.setCustomValidity(''); phone.setCustomValidity(''); message.setCustomValidity('');
+  email.setCustomValidity(''); name.setCustomValidity(''); phone.setCustomValidity(''); message.setCustomValidity('');
   result.hidden = true;
 });
 function showError(text: string, unavailable = false) {
@@ -31,6 +32,7 @@ form.addEventListener('submit', async event => {
   name.setCustomValidity(name.value.trim() ? '' : 'Please enter your name.');
   phone.setCustomValidity(normalizedPhone ? '' : 'Enter a 10-digit Indian mobile number starting with 6, 7, 8, or 9.');
   message.setCustomValidity(message.value.trim() ? '' : 'Please enter your message.');
+  email.setCustomValidity(isAllowedContactEmail(email.value, contact.allowedEmailDomains) ? '' : contact.emailProviderHint);
   if (!form.reportValidity()) return;
   const endpoint = form.dataset.endpoint ?? '';
   const fieldIds = {

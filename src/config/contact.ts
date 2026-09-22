@@ -9,5 +9,8 @@ export const contact = {
     subject: 'entry.87025741',
     message: 'entry.1398384653',
   },
+  // Five allowed providers; Microsoft includes its Outlook and Hotmail domains.
+  allowedEmailDomains: ['gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'icloud.com', 'aol.com'],
+  emailProviderHint: 'Use Gmail, Outlook/Hotmail, Yahoo, iCloud, or AOL.',
   timeoutMs: 20_000,
 };
