@@ -12,7 +12,7 @@ export async function contentImage(entry: ImageEntry): Promise<PhotoData> {
   const { collection, id, data } = entry;
   const label = `${collection}/${id}`;
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) throw new Error(`${label}: use a lowercase, hyphenated Markdown filename.`);
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*\.(webp|jpe?g|png)$/.test(data.image)) throw new Error(`${label}: image must be a local lowercase filename such as cover.webp, cover.jpg, or cover.png.`);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*\.(webp|jpe?g|png)$/i.test(data.image)) throw new Error(`${label}: image must be a local filename such as cover.webp, cover.jpg, or cover.png.`);
   if (!data.imageAlt?.trim()) throw new Error(`${label}: imageAlt must describe the image.`);
   const src = `images/${collection}/${id}/${data.image}`;
   try {
