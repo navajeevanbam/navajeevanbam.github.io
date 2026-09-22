@@ -1,5 +1,5 @@
 ---
-title: "Veda Vidyalay"
+title: "Ved Vidyalaya"
 excerpt: "Atharva Veda learning through the Gurukul Ashram tradition."
 category: "Our services"
 image: "cover.webp"
@@ -8,7 +8,7 @@ imageSource: "https://www.navajeevanbam.com/assets/images/Vidyadaan-by-Volunteer
 source: "https://www.navajeevanbam.com/home"
 ---
 
-The Ashram’s Veda Vidyalay is a Vedic school dedicated to Atharva Veda learning. Its teaching follows the Gurukul Ashram tradition and Indian culture, with guidance from learned teachers.
+The Ashram’s Ved Vidyalaya is a Vedic school dedicated to Atharva Veda learning. Its teaching follows the Gurukul Ashram tradition and Indian culture, with guidance from learned teachers.
 
 ## Keeping knowledge alive
 

@@ -24,7 +24,7 @@ export const home: HomeConfig = {
       'Navajeevan Seva Ashram provides free services to orphaned children, children in need, and older women, including widows. A home, nourishing food, education, and everyday support help create a place where people are cared for with dignity, beyond geographical boundaries.',
       'Established on 25 March 2012, the Ashram serves people as well as domestic animals. Based in Madanmohanpur, Kanishi, Brahmapur, Odisha, it grew under the active leadership of Sri Susant Kumar Maharana and a team of social workers.',
       'The institution is sponsored and supported by Dr. K. Sridhar Acharya, founder and president of Navajeevan Blind Relief Centre at Tiruchanur, Tirupati, Andhra Pradesh — a charitable trust with branches across different states of India.',
-      'Our five service activities bring this commitment to life: Children’s Welfare, Veda Vidyalay, Go-Sambardhan, Annalaxmi for Widows, and Ahalya Nivas. Together, they connect learning, nourishment, shelter, companionship, and care for animals.',
+      'Our five service activities bring this commitment to life: Children’s Welfare, Ved Vidyalaya, Go-Sambardhan, Annalaxmi for Widows, and Ahalya Nivas. Together, they connect learning, nourishment, shelter, companionship, and care for animals.',
     ],
   },
   projects: ['tree-plantation-2022', 'eye-testing-camp-2022', 'health-checkup-camp-2022'],
@@ -36,7 +36,7 @@ export const home: HomeConfig = {
   ],
   services: [
     { id: 'childrens-welfare', title: 'Children’s Welfare', description: 'A caring home, nourishing meals, and opportunities to learn for children in need.' },
-    { id: 'veda-vidyalay', title: 'Veda Vidyalay', description: 'Preserving Atharva Veda learning through the Gurukul Ashram tradition.' },
+    { id: 'veda-vidyalay', title: 'Ved vidyalaya', description: 'Preserving Atharva Veda learning through the Gurukul Ashram tradition.' },
     { id: 'go-sambardhan', title: 'Go-Sambardhan', description: 'Food, shelter, and healthcare for cows and calves at Navajeevan Goshala.' },
     { id: 'annalaxmi-for-widows', title: 'Annalaxmi for Widows', description: 'Ration support for older women without dependable family or financial support.' },
     { id: 'ahalya-nivas', title: 'Ahalya Nivas', description: 'Shelter and everyday care for older women who need a home and companionship.' },
