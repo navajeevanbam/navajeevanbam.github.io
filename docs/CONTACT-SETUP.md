@@ -4,11 +4,11 @@ The website posts contact messages to the public Google Form. Edit `src/config/c
 
 | Website field | Google Form question | Submission field ID |
 | --- | --- | --- |
-| Name | Name | `entry.2089867619` |
-| Mobile number | Phone | `entry.576901234` |
-| Email (optional) | Email | `entry.854492072` |
-| Topic | Type | `entry.87025741` |
-| Message | Comment | `entry.1398384653` |
+| Name | Name | `entry.145352443` |
+| Mobile number | Phone | `entry.535490106` |
+| Email (optional) | Email | `entry.494635287` |
+| Topic | Query Type | `entry.1517815594` |
+| Message | Comments | `entry.1889640487` |
 
 These are public submission entry IDs, not the internal question IDs. If questions are deleted and recreated, update their entry IDs. Keep the form published and accepting responses without requiring sign-in; keep Email optional.
 
