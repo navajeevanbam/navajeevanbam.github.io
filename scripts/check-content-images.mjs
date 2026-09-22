@@ -21,7 +21,7 @@ try {
   }
   await assert.rejects(contentImage({ ...entry, data: { ...entry.data, image: 'missing.webp' } }), /cannot read public\/images\/events/);
   await assert.rejects(contentImage({ ...entry, data: { ...entry.data, imageAlt: ' ' } }), /imageAlt/);
-  await assert.rejects(contentImage({ ...entry, data: { ...entry.data, image: '..\/cover.webp' } }), /local lowercase filename/);
+  await assert.rejects(contentImage({ ...entry, data: { ...entry.data, image: '..\/cover.webp' } }), /local filename/);
   await writeFile(`${localFolder}/broken.webp`, 'not an image');
   await assert.rejects(contentImage({ ...entry, data: { ...entry.data, image: 'broken.webp' } }), /cannot read/);
   console.log('Content images: formats, dimensions, missing files, invalid files, and alt text verified.');

@@ -6,7 +6,7 @@ const shared = {
   title: z.string(),
   excerpt: z.string(),
   source: z.url().optional(),
-  image: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\.(webp|jpe?g|png)$/, 'Use a local image filename such as cover.webp'),
+  image: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\.(webp|jpe?g|png)$/i, 'Use a local image filename such as cover.webp'),
   imageAlt: z.string().trim().min(1, 'Describe the image in imageAlt'),
   imageSource: z.url().optional(),
   category: z.string(),
