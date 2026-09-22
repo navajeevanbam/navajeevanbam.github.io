@@ -1,4 +1,4 @@
-import { normalizeIndianMobile, isContactEndpointConfigured, sendContact } from '../lib/contact';
+import { normalizeIndianMobile, isContactEndpointConfigured, isContactFieldIdsConfigured, sendContact } from '../lib/contact';
 const form = document.querySelector<HTMLFormElement>('#contact-form')!;
 const panel = document.querySelector<HTMLElement>('#contact-entry')!;
 const success = document.querySelector<HTMLElement>('#contact-success')!;
@@ -33,8 +33,11 @@ form.addEventListener('submit', async event => {
   message.setCustomValidity(message.value.trim() ? '' : 'Please enter your message.');
   if (!form.reportValidity()) return;
   const endpoint = form.dataset.endpoint ?? '';
-  const accessKey = form.dataset.accessKey?.trim() ?? '';
-  if (!isContactEndpointConfigured(endpoint) || !accessKey) {
+  const fieldIds = {
+    name: name.name, phone: phone.name, email: email.name,
+    subject: subject.name, message: message.name,
+  };
+  if (!isContactEndpointConfigured(endpoint) || !isContactFieldIdsConfigured(fieldIds)) {
     showError('The contact form is not available yet. Please call or email us using the links below.', true);
     return;
   }
@@ -45,7 +48,7 @@ form.addEventListener('submit', async event => {
   form.setAttribute('aria-busy', 'true');
   result.hidden = true;
   try {
-    await sendContact(endpoint, accessKey, {
+    await sendContact(endpoint, fieldIds, {
       name: name.value.trim(), phone: normalizedPhone!, email: email.value.trim(),
       subject: subject.value, message: message.value.trim(),
     }, Number(form.dataset.timeout));

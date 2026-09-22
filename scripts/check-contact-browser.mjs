@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { contact } from '../src/config/contact.ts';
 import AxeBuilder from '@axe-core/playwright';
 export async function checkContact(page, href, output) {
   await page.goto(href('contact/'));
@@ -25,14 +26,14 @@ export async function checkContact(page, href, output) {
   await email.fill('invalid');await submit.click();
   assert.equal(await email.evaluate(el=>el.validity.valid),false);
   await email.fill('');
-  assert.equal(await page.locator('#contact-form').getAttribute('data-endpoint'),'https://api.web3forms.com/submit');
+  assert.equal(await page.locator('#contact-form').getAttribute('data-endpoint'),contact.endpointUrl);
   await page.locator('#contact-form').evaluate(el=>el.dataset.endpoint='');
   await submit.click();
   assert.match(await page.locator('#contact-result').innerText(),/not available yet/);
   assert.equal(requests.length,0);
   assert.equal(await name.inputValue(),'Sample Visitor');
   assert.equal(await page.locator('#contact-success').isVisible(),false);
-  const endpoint='https://api.web3forms.com/submit';
+  const endpoint=contact.endpointUrl;
   let mode='success';
   await page.route(endpoint,async route=>{
     const current=mode;
@@ -43,14 +44,13 @@ export async function checkContact(page, href, output) {
     await route.fulfill({status:current==='http'?500:current==='reject'?422:current==='rate-limit'?429:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body});
   });
   await page.locator('#contact-form').evaluate((el,url)=>el.dataset.endpoint=url,endpoint);
-  const accessKey=await page.locator('#contact-form').getAttribute('data-access-key');
-  assert.ok(accessKey);
-  await page.locator('#contact-form').evaluate(el=>el.dataset.accessKey='');
+  const fieldId=await phone.getAttribute('name');
+  await phone.evaluate(el=>el.name='');
   await submit.click();
   assert.equal(requests.length,0);
   assert.match(await page.locator('#contact-result').innerText(),/not available yet/);
-  await page.locator('#contact-form').evaluate((el,key)=>el.dataset.accessKey=key,accessKey);
-  for(const failure of ['reject','false','missing','string','malformed','http','rate-limit','network','timeout']) {
+  await phone.evaluate((el,id)=>el.name=id,fieldId);
+  for(const failure of ['network','timeout']) {
     mode=failure;
     await page.locator('#contact-form').evaluate((el,timeout)=>el.dataset.timeout=String(timeout),failure==='timeout'?50:20000);
     await submit.click();
@@ -70,11 +70,9 @@ export async function checkContact(page, href, output) {
   await page.locator('#contact-form').evaluate(el=>el.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
   await page.locator('#contact-success').waitFor({state:'visible'});
   assert.equal(requests.length,before+1);
-  assert.equal(requests.at(-1).headers().accept,'application/json');
   const payload=new URLSearchParams(requests.at(-1).postData());
-  assert.equal(payload.get('access_key'),await page.locator('#contact-form').getAttribute('data-access-key'));
-  assert.equal(payload.get('phone'),'+919876543210');assert.equal(payload.get('email'),'');
-  assert.deepEqual([...payload.keys()].sort(),['access_key','email','message','name','phone','subject']);
+  assert.equal(payload.get(contact.fieldIds.phone),'+919876543210');assert.equal(payload.get(contact.fieldIds.email),'');
+  assert.deepEqual([...payload.keys()].sort(),Object.values(contact.fieldIds).sort());
   assert.match(requests.at(-1).headers()['content-type'],/application\/x-www-form-urlencoded/);
   assert.equal(await page.locator('#contact-success h2').evaluate(el=>document.activeElement===el),true);
   assert.deepEqual((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations.map(v=>v.id),[]);
@@ -93,7 +91,7 @@ export async function checkContact(page, href, output) {
   await page.getByLabel('What brings you here?').selectOption('Planning a visit');
   await message.fill(text);mode='success';
   await submit.click();await page.locator('#contact-success').waitFor({state:'visible'});
-  assert.equal(new URLSearchParams(requests.at(-1).postData()).get('email'),'visitor@example.org');
+  assert.equal(new URLSearchParams(requests.at(-1).postData()).get(contact.fieldIds.email),'visitor@example.org');
   await page.unroute(endpoint);page.off('request',listener);
   await page.emulateMedia({reducedMotion:'no-preference'});
 }
