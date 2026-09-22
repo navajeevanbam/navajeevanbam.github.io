@@ -20,7 +20,6 @@ Open the local URL printed by Astro (normally `http://localhost:4321`).
 ```sh
 npm run check
 npm run build
-npm test
 npm run preview
 ```
 
@@ -76,7 +75,7 @@ Every event and story owns its image folder, including service stories. Folder n
    imageSource: "https://example.org/original-photo.jpg"
    ```
 
-5. Run `npm run check`, `npm run build`, and `npm test`. No TypeScript image registry edit is needed. Actual dimensions are read automatically during rendering; missing or unreadable images fail the build with the entry name and expected path.
+5. Run `npm run check` and `npm run build`. No TypeScript image registry edit is needed. Actual dimensions are read automatically during rendering; missing or unreadable images fail the build with the entry name and expected path.
 
 Additional photographs can live beside the cover with names such as `meal-preparation.webp` or `volunteers.jpg`. Storing them does not automatically create a gallery. Image filenames must be local basenames, not URLs or paths. Rename the matching image folder whenever an entry’s Markdown filename changes; that also changes its public page URL.
 
@@ -98,7 +97,7 @@ There are no analytics, embedded maps, or remote image dependencies. Contact del
 
 1. Push this project to a GitHub repository using `main` or `master` as the deployment branch (or update the workflow branch filter).
 2. In repository **Settings → Pages → Build and deployment**, choose **GitHub Actions**.
-3. The included `.github/workflows/deploy.yml` checks and builds the site, verifies local references, and publishes `dist/` on a push to `main` or `master`, or a manual run.
+3. The included `.github/workflows/deploy.yml` checks and builds the site, then publishes `dist/` on a push to `main` or `master`, or a manual run.
 
 The workflow obtains the deployment origin and base path from GitHub Pages, supporting both `https://owner.github.io/repository/` and root/custom-domain hosting. Every page is generated as a directory containing `index.html`; direct loading and refreshing detail routes work without SPA rewrites.
 
@@ -106,23 +105,11 @@ For manual builds, set the origin and base explicitly:
 
 ```sh
 SITE_URL=https://owner.github.io BASE_PATH=/repository npm run build
-BASE_PATH=/repository npm test
 ```
 
 For a custom domain, configure the domain in GitHub Pages, and use `/` as the base. For manual custom-domain builds, set `SITE_URL=https://your-domain.example BASE_PATH=/`. Canonical and absolute social image URLs are emitted when `SITE_URL` is available. No invented production hostname is included in local builds.
 
 No repository remote or live deployment is configured by this implementation.
-
-## Browser verification
-
-The browser checks cover 375px, 768px, 1024px, and 1440px viewports, route loading and refreshes, missing pages, local images, forms, filters, keyboard navigation, and accessibility. See `scripts/browser-check.mjs` for the runnable acceptance checks. It expects a built site and uses the installed Playwright Chromium browser.
-
-```sh
-npx playwright install chromium
-node scripts/browser-check.mjs
-```
-
-For a subpath build, run `BASE_PATH=/repository node scripts/browser-check.mjs`. Screenshots and test results go into the ignored `test-results/` directory.
 
 ### Favicons and social link
 
@@ -147,6 +134,6 @@ images:
 ---
 ```
 
-List photos in their display order. `cover` must match a listed filename; filenames must be unique within the album. Use lowercase hyphenated filenames and WebP, JPEG, or PNG images. Captions are optional and fall back to alt text. Dimensions are read automatically; no image registry edits are required. Run `npm run check`, `npm run build`, and `npm test` before publishing. Album IDs come from Markdown filenames.
+List photos in their display order. `cover` must match a listed filename; filenames must be unique within the album. Use lowercase hyphenated filenames and WebP, JPEG, or PNG images. Captions are optional and fall back to alt text. Dimensions are read automatically; no image registry edits are required. Run `npm run check` and `npm run build` before publishing. Album IDs come from Markdown filenames.
 
 The gallery contains the real Ganesh Puja album and one gallery illustration. Generation prompts are recorded in `scripts/gallery-image-prompts.json`. The viewer supports previous/next, arrow keys, Escape, focus restoration, and direct full-image links without JavaScript. There is no autoplay.

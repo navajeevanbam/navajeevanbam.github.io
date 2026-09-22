@@ -328,7 +328,6 @@ Open a second terminal in the same project folder, or stop the preview with Cont
 ```sh
 npm run check
 npm run build
-npm test
 ```
 
 If a command reports an error or failure, correct it before continuing. Copy the error message and ask the website maintainer for help if needed.

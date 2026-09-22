@@ -10,13 +10,6 @@ dist/
 .vite/
 *.tsbuildinfo
 
-# Test reports and coverage
-test-results/
-playwright-report/
-playwright/.cache/
-coverage/
-.nyc_output/
-
 # Local environment files (keep shareable examples)
 .env
 .env.*
