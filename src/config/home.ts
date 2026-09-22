@@ -36,7 +36,7 @@ export const home: HomeConfig = {
   ],
   services: [
     { id: 'childrens-welfare', title: 'Children’s Welfare', description: 'A caring home, nourishing meals, and opportunities to learn for children in need.' },
-    { id: 'veda-vidyalay', title: 'Ved vidyalaya', description: 'Preserving Atharva Veda learning through the Gurukul Ashram tradition.' },
+    { id: 'ved-vidyalaya', title: 'Ved Vidyalaya', description: 'Preserving Atharva Veda learning through the Gurukul Ashram tradition.' },
     { id: 'go-sambardhan', title: 'Go-Sambardhan', description: 'Food, shelter, and healthcare for cows and calves at Navajeevan Goshala.' },
     { id: 'annalaxmi-for-widows', title: 'Annalaxmi for Widows', description: 'Ration support for older women without dependable family or financial support.' },
     { id: 'ahalya-nivas', title: 'Ahalya Nivas', description: 'Shelter and everyday care for older women who need a home and companionship.' },
