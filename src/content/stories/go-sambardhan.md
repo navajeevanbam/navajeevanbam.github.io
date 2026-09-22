@@ -5,7 +5,6 @@ category: "Our services"
 image: "cover.webp"
 imageAlt: "Cows at Navajeevan Goshala"
 imageSource: "https://www.navajeevanbam.com/assets/images/Goshala.jpeg"
-sample: false
 source: "https://www.navajeevanbam.com/home"
 ---
 

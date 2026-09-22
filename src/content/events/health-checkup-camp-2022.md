@@ -6,7 +6,6 @@ category: "Community health"
 image: "cover.webp"
 imageAlt: "The Ashram community celebrating Holi"
 imageSource: "https://www.navajeevanbam.com/assets/images/Navajeevan-Ashram-Holi-Festival.jpg"
-sample: false
 source: "https://www.navajeevanbam.com/home"
 status: "past"
 location: "Brahmapur, Odisha"

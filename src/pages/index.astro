@@ -11,8 +11,8 @@ import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { url, dateLabel } from '../lib/site';
 const albums = (await getCollection('gallery')).sort(sortAlbums).slice(0, 3);
-const projects = await Promise.all(home.projects.map(async id => { const entry = await getEntry('events', id); if (!entry || entry.data.sample) throw new Error(`Missing reference project: ${id}`); return entry; }));
-const services = await Promise.all(home.services.map(async service => { const entry = await getEntry('stories', service.id); if (!entry || entry.data.sample) throw new Error(`Missing reference service: ${service.id}`); return { ...service, photo: await contentImage(entry) }; }));
+const projects = await Promise.all(home.projects.map(async id => { const entry = await getEntry('events', id); if (!entry) throw new Error(`Missing reference project: ${id}`); return entry; }));
+const services = await Promise.all(home.services.map(async service => { const entry = await getEntry('stories', service.id); if (!entry) throw new Error(`Missing reference service: ${service.id}`); return { ...service, photo: await contentImage(entry) }; }));
 ---
 <Layout scrollReveal title="A little care. A new beginning." description={`A home for care, learning, and belonging. Discover the people and programmes of ${site.name}.`} image="reference-children" active="">
   <HomeSlider/>

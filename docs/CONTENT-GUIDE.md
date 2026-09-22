@@ -65,7 +65,6 @@ The website reads image dimensions automatically. You do not need to measure the
 - Keep `true` and `false` lowercase, without quotes.
 - In lists, keep the spaces at the beginning of each line. Use spaces, not the Tab key.
 
-`sample: true` displays a sample label. Use it for practice, fictional content, or the existing AI-generated examples. Change it to `sample: false` only when replacing the example with a real activity or article and its real photographs. This setting is **not** a draft switch: sample items can still appear on the website.
 
 ## 1. Add a new event
 
@@ -102,7 +101,6 @@ category: "Learning together"
 status: "upcoming"
 location: "Ashram activity room"
 time: "3:00 PM – 5:00 PM"
-sample: true
 ---
 
 Join us for an afternoon of reading and storytelling.
@@ -129,7 +127,6 @@ Please contact the Ashram to ask about taking part.
 | `status` | `upcoming` for an event still to happen, or `past` for one that has happened. |
 | `location` | Where the event takes place. |
 | `time` | The time. Delete the whole line if you do not know it. |
-| `sample` | Keep `true` while practising; use `false` for real content and photographs. |
 
 Replace the paragraphs below the second `---` with your own event details.
 
@@ -179,7 +176,6 @@ imageAlt: "A teacher sharing a picture book with a group of children"
 category: "Learning together"
 author: "Ashram teaching team"
 readTime: 2
-sample: true
 ---
 
 A shared book can be the beginning of a lovely conversation.
@@ -195,7 +191,6 @@ Share a thought or lesson from the experience.
 
 ### Step 3: Add your own writing
 
-Change the title, introduction, photo details, and paragraphs. The meanings of `image`, `imageAlt`, `category`, and `sample` are the same as for events.
 
 - `date` is the story’s publication date. You may delete the whole line if no date is appropriate.
 - `author` is the writer’s name or team. You may delete the whole line.
@@ -236,7 +231,6 @@ Create `src/content/gallery/reading-day-2026.md` and copy this example:
 title: "Community Reading Day"
 date: "2026-10-15"
 description: "A collection of moments from our reading afternoon."
-sample: true
 cover: "reading-circle.jpg"
 images:
   - filename: "reading-circle.jpg"
@@ -258,7 +252,6 @@ images:
 | `title` | The event or occasion’s name. |
 | `date` | The date of the occasion. This is required for an album. |
 | `description` | A short introduction to the album. |
-| `sample` | `true` for a practice album; `false` for a real occasion with real photographs. |
 | `cover` | The photograph displayed on the album card. It must also appear in the `images` list. |
 | `filename` | The exact filename of one photograph in this album’s folder. |
 | `alt` | A description of what is visible in that photograph. Required for every photo. |
@@ -351,7 +344,6 @@ If a command reports an error or failure, correct it before continuing. Copy the
 | The album reports duplicate filenames | Remove the repeated photo entry. Each filename should appear once in the list. |
 | An error mentions `imageAlt` or `alt` | Add a short description of the photograph. Do not leave it empty. |
 | An error points to a line in the text file | Check quotation marks, colons, the two `---` lines, and list indentation. Compare with the example. |
-| The page says “Sample” | Check `sample`. Change it to `false` only if you have replaced the practice details and images with real content. |
 | A past event still appears under Upcoming | Change its `status` to `past`, save, check, and publish again. |
 | A new page does not appear in the preview | Save the file in the correct content folder and restart the local preview. |
 | A new album is not on the homepage | Only the three newest albums appear there. Check its date; it should still appear on the Gallery page. |
@@ -362,7 +354,6 @@ If a command reports an error or failure, correct it before continuing. Copy the
 - The filenames in the text match the actual photos.
 - Every photo has a clear description.
 - Dates, location, and names are correct.
-- Example wording has been replaced; `sample` accurately describes the content.
 - The item opens correctly in the local preview.
 - All three checking commands finish successfully.
 - Both the text file and photographs are included when sending the update for publication.

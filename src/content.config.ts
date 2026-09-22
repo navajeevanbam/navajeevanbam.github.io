@@ -5,7 +5,6 @@ import { glob } from 'astro/loaders';
 const shared = {
   title: z.string(),
   excerpt: z.string(),
-  sample: z.boolean(),
   source: z.url().optional(),
   image: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\.(webp|jpe?g|png)$/, 'Use a local image filename such as cover.webp'),
   imageAlt: z.string().trim().min(1, 'Describe the image in imageAlt'),
@@ -22,7 +21,7 @@ export const collections = {
   gallery: defineCollection({
     loader: glob({ pattern: '**/*.md', base: './src/content/gallery' }),
     schema: z.object({
-      title: z.string(), date: z.coerce.date(), description: z.string(), sample: z.boolean(),
+      title: z.string(), date: z.coerce.date(), description: z.string(),
       cover: shared.image, images: z.array(galleryImage).min(1),
     }).refine(album => album.images.some(image => image.filename === album.cover), { message: 'Cover must name an image in the album', path: ['cover'] })
       .refine(album => new Set(album.images.map(image => image.filename)).size === album.images.length, { message: 'Album filenames must be unique', path: ['images'] }),

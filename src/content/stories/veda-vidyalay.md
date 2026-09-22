@@ -5,7 +5,6 @@ category: "Our services"
 image: "cover.webp"
 imageAlt: "Volunteers and children learning together at the Ashram"
 imageSource: "https://www.navajeevanbam.com/assets/images/Vidyadaan-by-Volunteers-.jpg"
-sample: false
 source: "https://www.navajeevanbam.com/home"
 ---
 

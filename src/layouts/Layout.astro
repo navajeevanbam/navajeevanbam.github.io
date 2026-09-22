@@ -7,7 +7,7 @@ import Favicons from '../components/Favicons.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 import type { PhotoData } from '../lib/image-types';
 interface Props { title: string; description: string; active?: string; image?: string | PhotoData; scrollReveal?: boolean; }
-const { title, description, active = '', image = 'community', scrollReveal = true } = Astro.props;
+const { title, description, active = '', image = 'reference-community', scrollReveal = true } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const socialImage = Astro.site ? new URL(url((typeof image === 'string' ? photos[image] : image).src), Astro.site).href : undefined;
 ---

@@ -2,7 +2,6 @@
 title: "Ganesh Puja"
 date: "2026-09-14"
 description: "Moments from Ganesh Puja at Navajeevan Seva Ashram, with prayers and a community gathering."
-sample: false
 cover: "d.webp"
 images:
   - filename: "a.webp"

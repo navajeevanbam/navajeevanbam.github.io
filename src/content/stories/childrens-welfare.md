@@ -5,7 +5,6 @@ category: "Our services"
 image: "cover.webp"
 imageAlt: "Children gathered at Navajeevan Seva Ashram"
 imageSource: "https://www.navajeevanbam.com/assets/images/Childrens-Welfare.jpeg"
-sample: false
 source: "https://www.navajeevanbam.com/home"
 ---
 
