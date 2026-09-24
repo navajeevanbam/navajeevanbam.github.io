@@ -5,7 +5,7 @@ import Icon from './Icon.astro';
 import { url } from '../lib/site';
 ---
 <section class="home-slider" aria-label="Life at the Ashram" aria-roledescription="carousel">
-  <h1 class="sr-only">Navajeevan Seva Ashram — a little care, a new beginning</h1>
+  <h1 class="sr-only">Navajeevan Seva Trust — a little care, a new beginning</h1>
   <div id="home-slides" aria-live="off">
     {home.slides.map((slide, index) => <div class="home-slide" data-slide data-active={index === 0 ? "true" : "false"} aria-hidden={index !== 0 ? "true" : "false"} inert={index !== 0} hidden={index !== 0} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${home.slides.length}`}>
       <Photo name={slide.image} eager={index === 0} class="slide-photo"/>

@@ -1,6 +1,6 @@
 # Adding events, stories, and photo galleries
 
-A guide for teachers and staff at Navajeevan Seva Ashram.
+A guide for teachers and staff at Navajeevan Seva Trust.
 
 You do not need to write website code. For each new item, you will add a small text file and a folder of photographs. The website builds the page for you.
 

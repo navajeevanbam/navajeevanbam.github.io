@@ -15,7 +15,7 @@ export const site = {
   shortName: 'Navajeevan',
   logo: { src: 'images/branding/logo.png', width: 2170, height: 725 },
   community: { label: 'Join our community', href: 'https://www.facebook.com/Navajeevansevaashram' },
-  name: 'Navajeevan Seva Ashram',
+  name: 'Navajeevan Seva Trust',
   tagline: 'A little care. A new beginning.',
   city: 'BRAHMPUR',
   emails: ['navajeevansevaashram.bam@gmail.com', 'navajeevansevatrust@gmail.com'],

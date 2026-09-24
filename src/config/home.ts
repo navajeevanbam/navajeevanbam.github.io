@@ -21,7 +21,7 @@ export const home: HomeConfig = {
       { image: 'reference-mkcg', caption: 'MKCG students visiting the Ashram community.' },
     ],
     paragraphs: [
-      'Navajeevan Seva Ashram provides free services to orphaned children, children in need, and older women, including widows. A home, nourishing food, education, and everyday support help create a place where people are cared for with dignity, beyond geographical boundaries.',
+      'Navajeevan Seva Trust provides free services to orphaned children, children in need, and older women, including widows. A home, nourishing food, education, and everyday support help create a place where people are cared for with dignity, beyond geographical boundaries.',
       'Established on 25 March 2012, the Ashram serves people as well as domestic animals. Based in Madanmohanpur, Kanishi, Brahmapur, Odisha, it grew under the active leadership of Sri Susant Kumar Maharana and a team of social workers.',
       'The institution is sponsored and supported by Dr. K. Sridhar Acharya, founder and president of Navajeevan Blind Relief Centre at Tiruchanur, Tirupati, Andhra Pradesh — a charitable trust with branches across different states of India.',
       'Our five service activities bring this commitment to life: Children’s Welfare, Ved Vidyalaya, Go-Sambardhan, Annalaxmi for Widows, and Ahalya Nivas. Together, they connect learning, nourishment, shelter, companionship, and care for animals.',
@@ -43,8 +43,8 @@ export const home: HomeConfig = {
   ],
   team: [
     { name: 'Dr. K. Sridhar Acharya', role: 'Founder & President, Navajeevan Blind Relief Centre, Tirupati (AP)', image: 'reference-acharya' },
-    { name: 'Dr. Sangita Babu', role: 'President, Navajeevan Seva Ashram, Brahmapur', image: 'reference-babu' },
-    { name: 'Sri Susant Kumar Maharana', role: 'Secretary cum Incharge, Navajeevan Seva Ashram', image: 'reference-maharana' },
+    { name: 'Dr. Sangita Babu', role: 'President, Navajeevan Seva Trust, Brahmapur', image: 'reference-babu' },
+    { name: 'Sri Susant Kumar Maharana', role: 'Secretary cum Incharge, Navajeevan Seva Trust', image: 'reference-maharana' },
   ],
   donation: { title: 'A little generosity.\nA lasting difference.', description: 'Help sustain the meals, learning, shelter, and everyday care that make this community a home.', cta: 'Make a donation' },
   contact: { title: 'There’s a place for you here.', description: 'Visit by prior arrangement, explore volunteering, or simply start a conversation.', cta: 'Get in touch' },

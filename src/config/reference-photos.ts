@@ -4,14 +4,14 @@ import type { PhotoData } from '../lib/image-types';
 export const referencePhotos = {
   "reference-children": {
     "src": "images/home/hero/children.webp",
-    "alt": "Children gathered at Navajeevan Seva Ashram",
+    "alt": "Children gathered at Navajeevan Seva Trust",
     "width": 1280,
     "height": 963,
     "source": "https://www.navajeevanbam.com/assets/images/Childrens-Welfare.jpeg"
   },
   "reference-meals": {
     "src": "images/home/hero/meals.webp",
-    "alt": "An Annadaan meal at Navajeevan Seva Ashram",
+    "alt": "An Annadaan meal at Navajeevan Seva Trust",
     "width": 505,
     "height": 302,
     "source": "https://www.navajeevanbam.com/assets/images/Annadaan-Program.jpg"
@@ -67,7 +67,7 @@ export const referencePhotos = {
   },
   "reference-mkcg": {
     "src": "images/home/about/mkcg-students.webp",
-    "alt": "MKCG students visiting the children and community at Navajeevan Seva Ashram",
+    "alt": "MKCG students visiting the children and community at Navajeevan Seva Trust",
     "width": 512,
     "height": 250,
     "source": "https://www.navajeevanbam.com/assets/images/mkcg-students-at-navajeevan.jpg"

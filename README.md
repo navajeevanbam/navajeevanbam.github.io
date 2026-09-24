@@ -1,4 +1,4 @@
-# Navajeevan Seva Ashram
+# Navajeevan Seva Trust
 
 A fully static community-welfare website built with Astro, TypeScript, and Tailwind CSS. Includes an editorial homepage, Donation, Contact, three historical events, five service stories, a Ganesh Puja photo album and one AI-generated gallery illustration, a legacy About redirect, and a custom 404 page.
 
