@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 const repository = process.env.GITHUB_REPOSITORY?.split('/')[1];
@@ -11,5 +12,6 @@ export default defineConfig({
   base: process.env.BASE_PATH || defaultBase,
   // Accept both URL forms so missing paths reach the custom 404 in dev too.
   trailingSlash: 'ignore',
+  integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
 });
