@@ -20,6 +20,6 @@ export const site = {
   city: 'BRAHMPUR',
   emails: ['navajeevansevaashram.bam@gmail.com', 'navajeevansevatrust@gmail.com'],
   phones: [{ label: '+91 94373-22820', href: 'tel:+919437322820' }, { label: '+91 70085-30044', href: 'tel:+917008530044' }],
-  addressLines: ['Madanmohanpur, Kanishi', 'Brahmapur, Ganjam, Odisha'],
+  addressLines: ['Madanmohanpur, Kanishi', 'Brahmapur, Ganjam, Odisha, 761008'],
   visiting: 'Visits by prior arrangement',
 } satisfies SiteConfig;

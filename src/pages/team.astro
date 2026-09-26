@@ -1,0 +1,7 @@
+---
+import Favicons from '../components/Favicons.astro';
+import { url } from '../lib/site';
+const destination = url('#team');
+---
+<!doctype html>
+<html lang="en"><head><Favicons/><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content="Meet the Navajeevan Seva Trust team on our homepage."/><meta http-equiv="refresh" content={`0;url=${destination}`}/><title>Our Team — Continue to our homepage</title></head><body><main><h1>Meet our team on the homepage.</h1><p><a href={destination}>Meet the Navajeevan Seva Trust team</a></p></main></body></html>
